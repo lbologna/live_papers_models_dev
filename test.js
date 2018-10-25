@@ -6,3 +6,4 @@ function show2(){
   document.getElementById('shcompany').style.display = 'block';
 }
             
+document.getElementById("testID").innerHTML = "TEST"
