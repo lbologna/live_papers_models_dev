@@ -255,13 +255,8 @@ function ws_on_message(ws, evt, layout_01, title) {
 		datafinalp1 = datap1;
 	}
 
-	if (!flag == false){
-		datafinalp1.push({x:time, y:v});
-        	console.log(datafinalp1);
-		Plotly.react(plotlyChart_01, datafinalp1, layout_01);
-	} else {
-        	Plotly.react(plotlyChart_01, [{x:time, y:v}], layout_01);
-	}
+
+      	Plotly.react(plotlyChart_01, [{x:time, y:v}], layout_01);
 		     
 	$('#plot-title')[0].innerHTML = title;
 	$('#error-msg').animate({opacity: 0}, 0);
@@ -339,5 +334,14 @@ function resize_plots(){
 			</div>
 		</div>
 	</div>
+	
+	                        <div id="plots" class="plots">
+                            <div id="plot-title" style="text-align: center">
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col s6 offset-s3" id="plotlyChart_01"></div>
+                            </div>
+                        </div>
 </body>
 </html>
