@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bianchi et al 2020</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-2.8.3.min.js"></script>
+</head>
+<script>
+var model_url = 'bsp-lp-mccauley-et-al-2020/mccauley_et_al_2020_03.zip';
+
+var default_parameters = {"h": {'FUNCTIONS': ['biophysint()']}, 'tstop' : 800, 'v_init': -80,'nax_ax':  0.06, 'na3_soma':0.05, 'na3_dend':0.05,'na3_apical':0.04,'kdr_ax':0.3,'kdr_soma':0.1,'kdr_dend':0.06,'kdr_apical':0.06,'kmdb_ax':0.003,'kmdb_soma':0.001,'kap_ax':0.02,'kap_soma':0.02,'kap_dend':0.015,'valuekad':0.015};
+
+var recorded_vectors = {'TIME': 't', 'v(0.5)' : 'v'};
+
+var fadeinval = 1200;
+var fadeoutval = 600;
+
+
+$(document).ready(function () {
+
+	var nax_ax = document.getElementById("nax_ax");
+	var na3_soma = document.getElementById("na3_soma");
+	var na3_dend = document.getElementById("na3_dend");
+    var na3_apical = document.getElementById("na3_apical");
+	var kdr_ax = document.getElementById("kdr_ax");
+	var kdr_soma = document.getElementById("kdr_soma");
+	var kdr_dend = document.getElementById("kdr_dend");
+	var kdr_apical = document.getElementById("kdr_apical");
+	var kmdb_ax = document.getElementById("kmdb_soma");
+	var kmdb_soma = document.getElementById("kmdb_soma");
+	var kap_ax = document.getElementById("kap_ax");
+	var kap_soma = document.getElementById("kap_soma");
+	var kap_dend = document.getElementById("kap_dend");
+	var valuekad = document.getElementById("valuekad");
+
+	var plotlyChart_01 = document.getElementById("plotlyChart_01");
+
+	var plotdiv = document.getElementById("plots");
+
+	var margin = {
+		l: 60,
+		r: 25,
+		b: 60,
+		t: 35,
+		pad: 15
+	}
+
+	var layout_01= {
+		title: 'Voltage',
+		xaxis:{title:'t (ms)'},
+		yaxis:{title:'V (mV)'},
+		legend: { "orientation":"h", y:-0.2 },
+		showlegend:true,
+		margin: margin,
+	};
+
+
+	nax_ax.disabled = true;
+	na3_soma.disabled = true;
+	na3_dend.disabled = true;
+	na3_apical.disabled = true;
+	kdr_ax.disabled = true;
+	kdr_soma.disabled = true;
+	kdr_dend.disabled = true;
+	kdr_apical.disabled = true;
+	kmdb_ax.disabled = true;
+	kmdb_soma.disabled = true;
+	kap_ax.disabled = true;
+	kap_soma.disabled = true;
+	kap_dend.disabled = true;
+	valuekad.disabled = true;
+
+	nax_ax.value = "0.06";
+	na3_soma.value = "0.05";
+    na3_dend.value = "0.05";
+	na3_apical.value = "0.04";
+	kdr_ax.value = "0.3";
+	kdr_soma.value = "0.1";
+	kdr_dend.value = "0.06";
+	kdr_apical.value = "0.06";
+	kmdb_ax.value = "0.003";
+	kmdb_soma.value = "0.001";
+	kap_ax.value = "0.02";
+	kap_soma.value = "0.02";
+	kap_dend.value = "0.015";
+	valuekad.value = "0.015";
+
+	Plotly.newPlot(plotlyChart_01, [{x:[], y:[]}], layout_01, {displayModeBar: false}, {responsive: true});
+
+	resize_plots();
+
+	$(window).resize(function(){
+		resize_plots();
+	});
+
+	$("#nax_ax,#na3_soma,#na3_dend,#na3_apical,#kdr_ax,#kdr_soma,#kdr_dend,#kdr_apical,#kmdb_ax,#kmdb_soma,#kap_ax,#kap_soma,#kap_dend,#valuekad").keyup(validate_parameters)
+
+	$("#nax_ax,#na3_soma,#na3_dend,#na3_apical,#kdr_ax,#kdr_soma,#kdr_dend,#kdr_apical,#kmdb_ax,#kmdb_soma,#kap_ax,#kap_soma,#kap_dend,#valuekad").on("change", validate_parameters);
+
+	$('#run').click(function() {
+		$('#error-msg').animate({opacity: 0}, 0);
+		$('#plots').animate({opacity: 0}, fadeoutval);
+		$('#loader').animate({opacity: 1}, fadeinval);
+		title = "<h5>EPSPs</h5>";
+		var xmin = 0;
+		var xmax = 200;
+		layout_01['xaxis']['autorange'] = false;
+		layout_01['xaxis']['range'] = [xmin, xmax];
+		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
+		ws.onerror = function(evt){ws_on_error(evt)}
+		ws.onopen = function(){ws_on_open(ws, default_parameters, nax_ax,na3_soma,na3_dend,na3_apical,kdr_ax,kdr_soma,kdr_dend,kdr_apical,kmdb_ax,kmdb_soma,kap_ax,kap_soma,kap_dend,valuekad)}
+		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
+
+	});
+
+
+
+	$('#switch').on("change", function() {
+		if ($('#switch')[0].checked) {
+            nax_ax.disabled = false;
+	        na3_soma.disabled = false;
+	        na3_dend.disabled = false;
+	        na3_apical.disabled = false;
+	        kdr_ax.disabled = false;
+	        kdr_soma.disabled = false;
+	        kdr_dend.disabled = false;
+	        kdr_apical.disabled = false;
+	        kmdb_ax.disabled = false;
+	        kmdb_soma.disabled = false;
+	        kap_ax.disabled = false;
+	        kap_soma.disabled = false;
+	        kap_dend.disabled = false;
+	        valuekad.disabled = false;
+		} else {
+            nax_ax.disabled = true;
+	        na3_soma.disabled = true;
+	        na3_dend.disabled = true;
+	        na3_apical.disabled = true;
+	        kdr_ax.disabled = true;
+	        kdr_soma.disabled = true;
+	        kdr_dend.disabled = true;
+	        kdr_apical.disabled = true;
+	        kmdb_ax.disabled = true;
+	        kmdb_soma.disabled = true;
+	        kap_ax.disabled = true;
+	        kap_soma.disabled = true;
+	        kap_dend.disabled = true;
+	        valuekad.disabled = true;
+			$("#message").hide();
+			nax_ax.value = "0.06";
+	        na3_soma.value = "0.05";
+            na3_dend.value = "0.05";
+	        na3_apical.value = "0.04";
+	        kdr_ax.value = "0.3";
+	        kdr_soma.value = "0.1";
+	        kdr_dend.value = "0.06";
+	        kdr_apical.value = "0.06";
+	        kmdb_ax.value = "0.003";
+	        kmdb_soma.value = "0.001";
+	        kap_ax.value = "0.02";
+	        kap_soma.value = "0.02";
+	        kap_dend.value = "0.015";
+	        valuekad.value = "0.015";
+		}
+	});
+
+
+	$("#run").click();
+});
+
+
+// open websocket connection
+function ws_on_open(ws, params, nax_ax,na3_soma,na3_dend,na3_apical,kdr_ax,kdr_soma,kdr_dend,kdr_apical,kmdb_ax,kmdb_soma,kap_ax,kap_soma,kap_dend,valuekad){
+	ws.send(JSON.stringify({'cmd': 'set_url', 'data': model_url}));
+	params["nax_ax"] = parseFloat(nax_ax.value)
+	params["na3_soma"] = parseFloat(na3_soma.value)
+	params["na3_dend"] = parseFloat(na3_dend.value)
+	params["na3_apical"] = parseFloat(na3_apical.value)
+	params["kdr_ax"] = parseFloat(kdr_ax.value)
+	params["kdr_soma"] = parseFloat(kdr_soma.value)
+	params["kdr_dend"] = parseFloat(kdr_dend.value)
+	params["kdr_apical"] = parseFloat(kdr_apical.value)
+	params["kmdb_ax"] = parseFloat(kmdb_ax.value)
+	params["kmdb_soma"] = parseFloat(kmdb_soma.value)
+	params["kap_ax"] = parseFloat(kap_ax.value)
+	params["kap_soma"] = parseFloat(kap_soma.value)
+	params["kap_dend"] = parseFloat(kap_dend.value)
+	params["valuekad"] = parseFloat(valuekad.value)
+
+	ws.send(JSON.stringify({"cmd": 'set_params', "data": params}))
+	ws.send(JSON.stringify({'cmd': 'run_simulation', 'data': recorded_vectors}))
+}
+
+// handle errors event
+function ws_on_error(){
+	$('#plots').animate({opacity: 0}, fadeoutval);
+	$('#loader').animate({opacity: 0}, fadeoutval);
+	const wait = time => new Promise(
+		res => setTimeout(() => res(), time)
+	);
+	wait(fadeinval + fadeoutval)
+		.then(() => $('#error-msg').animate({opacity: 1}, fadeinval));
+
+}
+// open websocket connection
+function ws_on_message(ws, evt, layout_01, title) {
+	// handle received message
+
+	var flag = $('#switch-lines')[0].checked;
+
+	var received_msg = JSON.parse(evt.data);
+	console.log("received_msg")
+	console.log(received_msg)
+	var time = received_msg["data"]["TIME"];
+	var v = received_msg["data"]["v(0.5)"];
+	var val_nax_ax=$('#nax_ax').val();
+	var val_na3_soma=$('#na3_soma').val();
+	var val_na3_dend=$('#na3_dend').val();
+	var val_na3_apical=$('#na3_apical').val();
+	var val_kdr_ax=$('#kdr_ax').val();
+	var val_kdr_soma=$('#kdr_soma').val();
+	var val_kdr_dend=$('#kdr_dend').val();
+	var val_kdr_apical=$('#kdr_apical').val();
+	var val_kmdb_ax=$('#kmdb_ax').val();
+	var val_kmdb_soma=$('#kmdb_soma').val();
+	var val_kap_ax=$('#kap_ax').val();
+	var val_kap_soma=$('#kap_soma').val();
+	var val_kap_dend=$('#kap_dend').val();
+	var val_valuekad=$('#valuekad').val();
+
+	// read current data in plot
+	var datap1 = plotlyChart_01.data;
+
+	// create empty final data vector
+	var datafinalp1 = [];
+
+
+	// if plot already present, copy plot data on final vectors
+	if (datap1 && !(datap1[0].x.length == 0)){
+		datafinalp1 = datap1;
+	}
+
+	if (!flag == false){
+		datafinalp1.push({x:time, y:v, name:'nax_ax: '+val_nax_ax+' - na3_soma: '+val_na3_soma+' -na3_dend: '+val_na3_dend+' - na3_apical: '+val_na3_apical+' -kdr_ax: '+val_kdr_ax+' - kdr_soma: '+val_kdr_soma+' -kdr_dend: '+val_kdr_dend+' - kdr_apical: '+val_kdr_apical+' -kmdb_ax: '+val_kmdb_ax+' - kmdb_soma: '+val_kmdb_soma+' -kap_ax: '+val_kap_ax+' - kap_soma: '+val_kap_soma+' -kap_dend: '+val_kap_dend+' - valuekad: '+val_valuekad});
+        console.log(datafinalp1)
+		Plotly.react(plotlyChart_01, datafinalp1, layout_01);
+	} else {
+        Plotly.react(plotlyChart_01, [{x:time, y:v,
+            name:'nax_ax: '+val_nax_ax+' - na3_soma: '+val_na3_soma+' -na3_dend: '+val_na3_dend+' - na3_apical: '+val_na3_apical+' -kdr_ax: '+val_kdr_ax+' - kdr_soma: '+val_kdr_soma+' -kdr_dend: '+val_kdr_dend+' - kdr_apical: '+val_kdr_apical+' -kmdb_ax: '+val_kmdb_ax+' - kmdb_soma: '+val_kmdb_soma+' -kap_ax: '+val_kap_ax+' - kap_soma: '+val_kap_soma+' -kap_dend: '+val_kap_dend+' - valuekad: '+val_valuekad}], layout_01);
+	}
+
+
+
+
+	$('#plot-title')[0].innerHTML = title;
+	$('#error-msg').animate({opacity: 0}, 0);
+	$('#plots').animate({opacity: 1}, fadeinval);
+	$('#loader').animate({opacity: 0}, fadeoutval);
+	ws.close();
+}
+
+function resize_plots(){
+	var plotdiv = document.getElementById("collapsetitle");
+	var plot_width = Math.trunc((plotdiv.offsetWidth-200)/2);
+
+	var plotlyChart_01 = document.getElementById("plotlyChart_01");
+
+	var layout_01 = plotlyChart_01.layout;
+
+	var data_01 = plotlyChart_01.data;
+
+	layout_01["width"] = plot_width;
+
+	Plotly.react(plotlyChart_01, data_01, layout_01);
+
+}
+
+function validate_parameters(){
+
+    var val_nax_ax=$('#nax_ax').val();
+	var val_na3_soma=$('#na3_soma').val();
+	var val_na3_dend=$('#na3_dend').val();
+	var val_na3_apical=$('#na3_apical').val();
+	var val_kdr_ax=$('#kdr_ax').val();
+	var val_kdr_soma=$('#kdr_soma').val();
+	var val_kdr_dend=$('#kdr_dend').val();
+	var val_kdr_apical=$('#kdr_apical').val();
+	var val_kmdb_ax=$('#kmdb_ax').val();
+	var val_kmdb_soma=$('#kmdb_soma').val();
+	var val_kap_ax=$('#kap_ax').val();
+	var val_kap_soma=$('#kap_soma').val();
+	var val_kap_dend=$('#kap_dend').val();
+	var val_valuekad=$('#valuekad').val();
+	if(val_wNMDA<0 || val_wNMDA>0.009 || val_taur<0 || val_taur>50 || val_wNMDA=='' || val_taur==''){
+		$("#message").show();
+		$("#run").attr("disabled", true);
+		$("#nax_ax").css("background-color","#f8f8fa");
+		$("#na3_soma").css("background-color","#f8f8fa");
+		$("#na3_dend").css("background-color","#f8f8fa");
+		$("#na3_apical").css("background-color","#f8f8fa");
+		$("#kdr_ax").css("background-color","#f8f8fa");
+		$("#kdr_soma").css("background-color","#f8f8fa");
+		$("#kdr_dend").css("background-color","#f8f8fa");
+		$("#kdr_apical").css("background-color","#f8f8fa");
+		$("#kmdb_ax").css("background-color","#f8f8fa");
+		$("#kmdb_soma").css("background-color","#f8f8fa");
+		$("#kap_ax").css("background-color","#f8f8fa");
+		$("#kap_soma").css("background-color","#f8f8fa");
+		$("#kap_dend").css("background-color","#f8f8fa");
+		$("#valuekad").css("background-color","#f8f8fa");
+	}
+	else{
+		$("#message").hide();
+		$("#run").attr("disabled", false);
+		$("#nax_ax").css("background-color","#fff");
+		$("#na3_soma").css("background-color","#fff");
+		$("#na3_dend").css("background-color","#fff");
+		$("#na3_apical").css("background-color","#fff");
+		$("#kdr_ax").css("background-color","#fff");
+		$("#kdr_soma").css("background-color","#fff");
+		$("#kdr_dend").css("background-color","#fff");
+		$("#kdr_apical").css("background-color","#fff");
+		$("#kmdb_ax").css("background-color","#fff");
+		$("#kmdb_soma").css("background-color","#fff");
+		$("#kap_ax").css("background-color","#fff");
+		$("#kap_soma").css("background-color","#fff");
+		$("#kap_dend").css("background-color","#fff");
+		$("#valuekad").css("background-color","#fff");
+	}
+}
+</script>
+<body>
+	<p>
+		<link rel="stylesheet"
+			  type="text/css"
+			  href="https://object.cscs.ch/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2020_mccauley_et_al/mccauley_et_al_2020.css" />
+	</p>
+	<div id="collapsetitle">
+		<p>
+			A reduced self-consistent set of files needed to reproduce&nbsp;Fig. 6c of
+			the paper is available on
+			<a href="https://senselab.med.yale.edu/ModelDB/ShowModel?model=257027#tabs-1"
+			   target="_blank">ModelDB</a>
+			<br />
+			<br />
+			After selecting the options corresponding to the modulation of the NMDA
+			receptor weights and the AMPA recovery time, simulation will reproduce the
+			temporal summation of composite glutamatergic EPSPs at the stimulation
+			frequency of 10 Hz (Fig. 6c of the paper).<br /><br />
+			The simulations were run to mimic glutamatergic EPSPs during the L phase
+			(&amp;#964<sub>rec</sub>=10 and w<sub>NMDA</sub>=0.009, the default
+			settings) and in conditions that mimic the reduced NMDA receptor expression
+			in the D phase (&amp;#964<sub>rec</sub>=10 and w<sub>NMDA</sub>=0.00243,
+			green line), the reduced AMPA EPSP summation during the D phase due to
+			retraction of astrocytic processes (&amp;#964<sub>rec</sub>=20 and
+			w<sub>NMDA</sub>=0.009, yellow line), or both effects at the same time
+			(&amp;#964<sub>rec</sub>=20 and w<sub>NMDA</sub>=0.00243, brown line).<br />
+			<br />
+			<em>
+				HOWTO: Change settings by turning "on" the
+				<b>"Reset/set parameters"</b> switch to run simulation with your own NMDA
+				and AMPA receptor configuration.<br />
+				Turn "on" the <b>"Persistent plot"</b> switch to compare plots of
+				different simulations.
+			</em>
+		</p>
+		<div class="divider"></div>
+		<div style="position: relative; margin-left: 25px; margin-right: 25px">
+			<div id="plots" class="plots">
+				<div id="plot-title" style="text-align: center"></div>
+				<br />
+				<div class="row">
+					<div class="col s6 offset-s3" id="plotlyChart_01"></div>
+				</div>
+			</div>
+			<div class="overlay" id="error-msg">
+				<div class="loader-class">
+					<div style="text-align: center" class="row">
+						An error occurred while connecting to the server
+						<br />
+						Please try again in a few seconds
+					</div>
+				</div>
+			</div>
+			<div class="overlay" id="loader">
+				<div class="loader-class">
+					<div style="text-align: center" class="row">
+						Launching simulation. Please wait ...
+						<div class="progress">
+							<div class="indeterminate"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div id="paper-sim" class="col s12" style="margin-top: 10px">
+				<div style="margin-left: 25px; margin-right: 25px">
+					<div class="divider"></div>
+					<h6><strong>Settings</strong></h6>
+					<div style="overflow-x: auto">
+						<br />
+						<table class="centered">
+							<tr>
+							<tbody>
+								<tr id="paramsrow">
+									<td><em>nax</em><sub>ax</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="nax_ax"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="nax_ax"></label>
+										</div>
+									</td>
+									<td><em>na3</em><sub>soma</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="na3_soma"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="na3_soma"></label>
+										</div>
+									</td>
+									<td><em>na3</em><sub>dend</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="na3_dend"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="na3_dend"></label>
+										</div>
+									</td>
+									<td><em>na3</em><sub>apical</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="na3_apical"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="na3_apical"></label>
+										</div>
+									</td>
+								<tr id="paramsrow">
+									<td><em>kdr</em><sub>ax</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kdr_ax"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kdr_ax"></label>
+										</div>
+									</td>
+									<td><em>kdr</em><sub>soma</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kdr_soma"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kdr_soma"></label>
+										</div>
+									</td>
+									<td><em>kdr</em><sub>dend</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kdr_dend"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kdr_dend"></label>
+										</div>
+									</td>
+									<td><em>kdr</em><sub>apical</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kdr_apical"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kdr_apical"></label>
+										</div>
+									</td>
+								</tr>
+								<tr id="paramsrow">
+									<td><em>kmdb</em><sub>ax</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kmdb_ax"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kmdb_ax"></label>
+										</div>
+									</td>
+									<td><em>kmdb</em><sub>soma</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kmdb_soma"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kmdb_soma"></label>
+										</div>
+									</td>
+									<td><em>kap</em><sub>ax</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kap_ax"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kap_ax"></label>
+										</div>
+									</td>
+									<td><em>kap</em><sub>soma</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kap_soma"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kap_soma"></label>
+										</div>
+									</td>									
+								</tr>
+								<tr id="paramsrow">
+									<td><em>kap</em><sub>dend</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kap_dend"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kap_dend"></label>
+										</div>
+									</td>
+									<td><em>valuekad</em></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="valuekad"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="valuekad"></label>
+										</div>
+									</td>
+								</tr>
+								<tr id="paramsrow">
+									<td>
+										<!-- Switch -->
+										<div class="switch tooltipped"
+											 data-position="top"
+											 data-html="true"
+											 data-tooltip="'Reset' to reproduce Fig. 1B, Fig. 1C and Fig. 1D. 'Set' to insert your own simulation parameters.">
+											<label>
+												<input id="switch" type="checkbox" />
+												<span class="lever"></span>
+												<br />
+												Reset/Set
+												<br />
+												parameters
+											</label>
+										</div>
+									</td>
+									<th style="
+                      border: 1px solid black;
+                      border-color: #e2e2e2;
+                      border-left: none;
+                    "></th>
+									<td>
+										<div class="switch tooltipped"
+											 data-position="top"
+											 data-html="true"
+											 data-tooltip="'Keep lines' to prevent the plots to be cleaned up">
+											<label>
+												<input id="switch-lines" type="checkbox" />
+												<span class="lever"></span>
+												<br />
+												Persistent
+												<br />
+												plots
+											</label>
+										</div>
+									</td>
+
+									<th style="
+                      border: 1px solid black;
+                      border-color: #e2e2e2;
+                      border-right: none;
+                    "></th>
+									<td>
+										<div class="col s5 offset-s1">
+											<button type="submit"
+													style="margin: 6px; width: 120px"
+													class="col s12 waves-effect waves-light btn"
+													id="run">
+												Run
+											</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<label id="message" style="color: red; display: none">**Please select a value between 0 and 5</label>
+								</tr>
+							</tbody>
+							</tr>
+						</table>
+					</div>
+					<br />
+				</div>
+				<br />
+			</div>
+		</div>
+	</div>
+</body>
+</html>
