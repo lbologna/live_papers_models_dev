@@ -262,10 +262,7 @@ function ws_on_message(ws, evt, layout_01, title) {
 	} else {
         Plotly.react(plotlyChart_01, [{x:time, y:v], layout_01);
 	}
-
-
-
-	
+		     
 	$('#plot-title')[0].innerHTML = title;
 	$('#error-msg').animate({opacity: 0}, 0);
 	$('#plots').animate({opacity: 1}, fadeinval);
