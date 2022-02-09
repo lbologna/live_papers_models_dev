@@ -285,8 +285,6 @@ function resize_plots(){
 	Plotly.react(plotlyChart_01, data_01, layout_01);
 	
 }
-
-
 </script>
 <body>
 	<p>
@@ -295,34 +293,7 @@ function resize_plots(){
 			  href="https://object.cscs.ch/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2020_mccauley_et_al/mccauley_et_al_2020.css" />
 	</p>
 	<div id="collapsetitle">
-		<p>
-			A reduced self-consistent set of files needed to reproduce&nbsp;Fig. 6c of
-			the paper is available on
-			<a href="https://senselab.med.yale.edu/ModelDB/ShowModel?model=257027#tabs-1"
-			   target="_blank">ModelDB</a>
-			<br />
-			<br />
-			After selecting the options corresponding to the modulation of the NMDA
-			receptor weights and the AMPA recovery time, simulation will reproduce the
-			temporal summation of composite glutamatergic EPSPs at the stimulation
-			frequency of 10 Hz (Fig. 6c of the paper).<br /><br />
-			The simulations were run to mimic glutamatergic EPSPs during the L phase
-			(&amp;#964<sub>rec</sub>=10 and w<sub>NMDA</sub>=0.009, the default
-			settings) and in conditions that mimic the reduced NMDA receptor expression
-			in the D phase (&amp;#964<sub>rec</sub>=10 and w<sub>NMDA</sub>=0.00243,
-			green line), the reduced AMPA EPSP summation during the D phase due to
-			retraction of astrocytic processes (&amp;#964<sub>rec</sub>=20 and
-			w<sub>NMDA</sub>=0.009, yellow line), or both effects at the same time
-			(&amp;#964<sub>rec</sub>=20 and w<sub>NMDA</sub>=0.00243, brown line).<br />
-			<br />
-			<em>
-				HOWTO: Change settings by turning "on" the
-				<b>"Reset/set parameters"</b> switch to run simulation with your own NMDA
-				and AMPA receptor configuration.<br />
-				Turn "on" the <b>"Persistent plot"</b> switch to compare plots of
-				different simulations.
-			</em>
-		</p>
+		
 		<div class="divider"></div>
 		<div style="position: relative; margin-left: 25px; margin-right: 25px">
 			<div id="plots" class="plots">
