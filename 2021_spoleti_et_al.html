@@ -255,7 +255,6 @@ function ws_on_message(ws, evt, layout_01, title) {
 		datafinalp1 = datap1;
 	}
 
-
       	Plotly.react(plotlyChart_01, [{x:time, y:v}], layout_01);
 		     
 	$('#plot-title')[0].innerHTML = title;
@@ -335,13 +334,6 @@ function resize_plots(){
 		</div>
 	</div>
 	
-	                        <div id="plots" class="plots">
-                            <div id="plot-title" style="text-align: center">
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col s6 offset-s3" id="plotlyChart_01"></div>
-                            </div>
-                        </div>
+	                        
 </body>
 </html>
