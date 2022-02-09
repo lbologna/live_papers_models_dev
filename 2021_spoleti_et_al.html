@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Spoleti et al 2021</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-2.8.3.min.js"></script>
+</head>
+<script>
+var model_url = 'EBRAINS_live_papers/2021_spoleti_et_al.zip';
+
+
+var default_parameters_wt230p25 = {"h": {'FUNCTIONS': ['WT23_0p25()']}, 'tstop' : 2500, 'v_init': -70};
+var default_parameters_wt230p5 = {"h": {'FUNCTIONS': ['WT23_0p5()']}, 'tstop' : 2500, 'v_init': -70};
+var default_parameters_tg230p25 = {"h": {'FUNCTIONS': ['TG23_0p25()']}, 'tstop' : 2500, 'v_init': -70};
+var default_parameters_tg230p5 = {"h": {'FUNCTIONS': ['TG23_0p5()']}, 'tstop' : 2500, 'v_init': -70};
+
+var default_parameters_wt680p25 = {"h": {'FUNCTIONS': ['WT68_0p25()']}, 'tstop' : 2500, 'v_init': -70};
+var default_parameters_wt680p5 = {"h": {'FUNCTIONS': ['WT68_0p5()']}, 'tstop' : 2500, 'v_init': -70};
+var default_parameters_tg680p25 = {"h": {'FUNCTIONS': ['TG68_0p25()']}, 'tstop' : 2500, 'v_init': -70};
+var default_parameters_tg680p5 = {"h": {'FUNCTIONS': ['TG68_0p5()']}, 'tstop' : 2500, 'v_init': -70};
+
+
+var recorded_vectors = {'TIME': 't', 'v(0.5)' : 'v'};
+
+var fadeinval = 1200;
+var fadeoutval = 600;
+
+
+$(document).ready(function () {
+
+	$("#wt230p25").click(function() {
+		$('#error-msg').animate({opacity: 0}, 0);
+		$('#plots').animate({opacity: 0}, fadeoutval);
+		$('#loader').animate({opacity: 1}, fadeinval);
+		title = "<h5>Voltage</h5>";
+		var xmin = 700;
+		var xmax = 2500;
+		layout_01['xaxis']['autorange'] = false;
+		layout_01['xaxis']['range'] = [xmin, xmax];
+		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
+		ws.onerror = function(evt){ws_on_error(evt)}
+		ws.onopen = function(){ws_on_open(ws, default_parameters_wt230p25)}
+		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
+		
+	}); 
+
+    $("#wt230p5").click(function() {
+		$('#error-msg').animate({opacity: 0}, 0);
+		$('#plots').animate({opacity: 0}, fadeoutval);
+		$('#loader').animate({opacity: 1}, fadeinval);
+		title = "<h5>Voltage</h5>";
+		var xmin = 700;
+		var xmax = 2500;
+		layout_01['xaxis']['autorange'] = false;
+		layout_01['xaxis']['range'] = [xmin, xmax];
+		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
+		ws.onerror = function(evt){ws_on_error(evt)}
+		ws.onopen = function(){ws_on_open(ws, default_parameters_wt230p5)}
+		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
+		
+	}); 
+	
+    $("#tg230p25").click(function() {
+		$('#error-msg').animate({opacity: 0}, 0);
+		$('#plots').animate({opacity: 0}, fadeoutval);
+		$('#loader').animate({opacity: 1}, fadeinval);
+		title = "<h5>Voltage</h5>";
+		var xmin = 700;
+		var xmax = 2500;
+		layout_01['xaxis']['autorange'] = false;
+		layout_01['xaxis']['range'] = [xmin, xmax];
+		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
+		ws.onerror = function(evt){ws_on_error(evt)}
+		ws.onopen = function(){ws_on_open(ws, default_parameters_tg230p25)}
+		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
+		
+	});
+	
+	$("#tg230p5").click(function() {
+		$('#error-msg').animate({opacity: 0}, 0);
+		$('#plots').animate({opacity: 0}, fadeoutval);
+		$('#loader').animate({opacity: 1}, fadeinval);
+		title = "<h5>Voltage</h5>";
+		var xmin = 700;
+		var xmax = 2500;
+		layout_01['xaxis']['autorange'] = false;
+		layout_01['xaxis']['range'] = [xmin, xmax];
+		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
+		ws.onerror = function(evt){ws_on_error(evt)}
+		ws.onopen = function(){ws_on_open(ws, default_parameters_tg230p5)}
+		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
+		
+	}); 
+	
+	$("#wt680p25").click(function() {
+		$('#error-msg').animate({opacity: 0}, 0);
+		$('#plots').animate({opacity: 0}, fadeoutval);
+		$('#loader').animate({opacity: 1}, fadeinval);
+		title = "<h5>Voltage</h5>";
+		var xmin = 700;
+		var xmax = 2500;
+		layout_01['xaxis']['autorange'] = false;
+		layout_01['xaxis']['range'] = [xmin, xmax];
+		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
+		ws.onerror = function(evt){ws_on_error(evt)}
+		ws.onopen = function(){ws_on_open(ws, default_parameters_wt680p25)}
+		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
+		
+	}); 
+	
+	$("#wt680p5").click(function() {
+		$('#error-msg').animate({opacity: 0}, 0);
+		$('#plots').animate({opacity: 0}, fadeoutval);
+		$('#loader').animate({opacity: 1}, fadeinval);
+		title = "<h5>Voltage</h5>";
+		var xmin = 700;
+		var xmax = 2500;
+		layout_01['xaxis']['autorange'] = false;
+		layout_01['xaxis']['range'] = [xmin, xmax];
+		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
+		ws.onerror = function(evt){ws_on_error(evt)}
+		ws.onopen = function(){ws_on_open(ws, default_parameters_wt680p5)}
+		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
+		
+	}); 
+	
+	$("#tg680p25").click(function() {
+		$('#error-msg').animate({opacity: 0}, 0);
+		$('#plots').animate({opacity: 0}, fadeoutval);
+		$('#loader').animate({opacity: 1}, fadeinval);
+		title = "<h5>Voltage</h5>";
+		var xmin = 700;
+		var xmax = 2500;
+		layout_01['xaxis']['autorange'] = false;
+		layout_01['xaxis']['range'] = [xmin, xmax];
+		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
+		ws.onerror = function(evt){ws_on_error(evt)}
+		ws.onopen = function(){ws_on_open(ws, default_parameters_tg680p25)}
+		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
+		
+	}); 
+	
+	$("#tg680p5").click(function() {
+		$('#error-msg').animate({opacity: 0}, 0);
+		$('#plots').animate({opacity: 0}, fadeoutval);
+		$('#loader').animate({opacity: 1}, fadeinval);
+		title = "<h5>Voltage</h5>";
+		var xmin = 700;
+		var xmax = 2500;
+		layout_01['xaxis']['autorange'] = false;
+		layout_01['xaxis']['range'] = [xmin, xmax];
+		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
+		ws.onerror = function(evt){ws_on_error(evt)}
+		ws.onopen = function(){ws_on_open(ws, default_parameters_tg680p5)}
+		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
+		
+	}); 
+	var plotlyChart_01 = document.getElementById("plotlyChart_01");
+	
+	var plotdiv = document.getElementById("plots");
+
+	var margin = {
+		l: 60,
+		r: 25,
+		b: 60,
+		t: 35,
+		pad: 15
+	}
+
+	var layout_01= {
+		title: 'Voltage',
+		xaxis:{title:'t (ms)'}, 
+		yaxis:{title:'V (mV)'},
+		legend: { "orientation":"h", y:-0.2 },
+		showlegend:true,
+		margin: margin,
+	};
+
+
+	
+	Plotly.newPlot(plotlyChart_01, [{x:[], y:[]}], layout_01, {displayModeBar: false}, {responsive: true});
+	
+	resize_plots();
+
+	$(window).resize(function(){
+		resize_plots();
+	});
+
+	//$("#nax_ax,#na3_soma,#na3_dend,#na3_apical,#kdr_ax,#kdr_soma,#kdr_dend,#kdr_apical,#kmdb_ax,#kmdb_soma,#kap_ax,#kap_soma,#kap_dend,#valuekad").keyup(validate_parameters)
+
+	//$("#nax_ax,#na3_soma,#na3_dend,#na3_apical,#kdr_ax,#kdr_soma,#kdr_dend,#kdr_apical,#kmdb_ax,#kmdb_soma,#kap_ax,#kap_soma,#kap_dend,#valuekad").on("change", validate_parameters);
+
+	/*$('#run').click(function() {
+		$('#error-msg').animate({opacity: 0}, 0);
+		$('#plots').animate({opacity: 0}, fadeoutval);
+		$('#loader').animate({opacity: 1}, fadeinval);
+		title = "<h5>Voltage</h5>";
+		var xmin = 700;
+		var xmax = 2500;
+		layout_01['xaxis']['autorange'] = false;
+		layout_01['xaxis']['range'] = [xmin, xmax];
+		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
+		ws.onerror = function(evt){ws_on_error(evt)}
+		ws.onopen = function(){ws_on_open(ws, default_parameters)}
+		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
+		
+	});    
+
+
+
+	$("#run").click();*/
+});
+
+
+// open websocket connection
+function ws_on_open(ws, params){
+	ws.send(JSON.stringify({'cmd': 'set_url', 'data': model_url}));
+	ws.send(JSON.stringify({"cmd": 'set_params', "data": params}))
+	ws.send(JSON.stringify({'cmd': 'run_simulation', 'data': recorded_vectors}))
+}
+
+// handle errors event
+function ws_on_error(){
+	$('#plots').animate({opacity: 0}, fadeoutval);
+	$('#loader').animate({opacity: 0}, fadeoutval);
+	const wait = time => new Promise(
+		res => setTimeout(() => res(), time)
+	);
+	wait(fadeinval + fadeoutval)
+		.then(() => $('#error-msg').animate({opacity: 1}, fadeinval));
+
+}
+// open websocket connection
+function ws_on_message(ws, evt, layout_01, title) {
+	// handle received message
+
+	var flag = $('#switch-lines')[0].checked;
+
+	var received_msg = JSON.parse(evt.data);
+	console.log("received_msg")
+	console.log(received_msg)
+	var time = received_msg["data"]["TIME"];
+	var v = received_msg["data"]["v(0.5)"];
+	
+
+	// read current data in plot
+	var datap1 = plotlyChart_01.data;
+	
+	// create empty final data vector
+	var datafinalp1 = [];
+	
+
+	// if plot already present, copy plot data on final vectors
+	if (datap1 && !(datap1[0].x.length == 0)){
+		datafinalp1 = datap1;
+	}
+
+	if (!flag == false){
+		datafinalp1.push({x:time, y:v});
+        console.log(datafinalp1)
+		Plotly.react(plotlyChart_01, datafinalp1, layout_01);
+	} else {
+        Plotly.react(plotlyChart_01, [{x:time, y:v], layout_01);
+	}
+
+
+
+	
+	$('#plot-title')[0].innerHTML = title;
+	$('#error-msg').animate({opacity: 0}, 0);
+	$('#plots').animate({opacity: 1}, fadeinval);
+	$('#loader').animate({opacity: 0}, fadeoutval);
+	ws.close();
+}
+
+function resize_plots(){
+	var plotdiv = document.getElementById("collapsetitle");
+	var plot_width = Math.trunc((plotdiv.offsetWidth-200)/2);
+
+	var plotlyChart_01 = document.getElementById("plotlyChart_01");
+	
+	var layout_01 = plotlyChart_01.layout;
+	
+	var data_01 = plotlyChart_01.data;
+	
+	layout_01["width"] = plot_width; 
+	
+	Plotly.react(plotlyChart_01, data_01, layout_01);
+	
+}
+
+
+</script>
+<body>
+	<p>
+		<link rel="stylesheet"
+			  type="text/css"
+			  href="https://object.cscs.ch/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2020_mccauley_et_al/mccauley_et_al_2020.css" />
+	</p>
+	<div id="collapsetitle">
+		<p>
+			A reduced self-consistent set of files needed to reproduce&nbsp;Fig. 6c of
+			the paper is available on
+			<a href="https://senselab.med.yale.edu/ModelDB/ShowModel?model=257027#tabs-1"
+			   target="_blank">ModelDB</a>
+			<br />
+			<br />
+			After selecting the options corresponding to the modulation of the NMDA
+			receptor weights and the AMPA recovery time, simulation will reproduce the
+			temporal summation of composite glutamatergic EPSPs at the stimulation
+			frequency of 10 Hz (Fig. 6c of the paper).<br /><br />
+			The simulations were run to mimic glutamatergic EPSPs during the L phase
+			(&amp;#964<sub>rec</sub>=10 and w<sub>NMDA</sub>=0.009, the default
+			settings) and in conditions that mimic the reduced NMDA receptor expression
+			in the D phase (&amp;#964<sub>rec</sub>=10 and w<sub>NMDA</sub>=0.00243,
+			green line), the reduced AMPA EPSP summation during the D phase due to
+			retraction of astrocytic processes (&amp;#964<sub>rec</sub>=20 and
+			w<sub>NMDA</sub>=0.009, yellow line), or both effects at the same time
+			(&amp;#964<sub>rec</sub>=20 and w<sub>NMDA</sub>=0.00243, brown line).<br />
+			<br />
+			<em>
+				HOWTO: Change settings by turning "on" the
+				<b>"Reset/set parameters"</b> switch to run simulation with your own NMDA
+				and AMPA receptor configuration.<br />
+				Turn "on" the <b>"Persistent plot"</b> switch to compare plots of
+				different simulations.
+			</em>
+		</p>
+		<div class="divider"></div>
+		<div style="position: relative; margin-left: 25px; margin-right: 25px">
+			<div id="plots" class="plots">
+				<div id="plot-title" style="text-align: center"></div>
+				<br />
+				<div class="row">
+					<div class="col s6 offset-s3" id="plotlyChart_01"></div>
+				</div>
+			</div>
+			<div class="overlay" id="error-msg">
+				<div class="loader-class">
+					<div style="text-align: center" class="row">
+						An error occurred while connecting to the server
+						<br />
+						Please try again in a few seconds
+					</div>
+				</div>
+			</div>
+			<div class="overlay" id="loader">
+				<div class="loader-class">
+					<div style="text-align: center" class="row">
+						Launching simulation. Please wait ...
+						<div class="progress">
+							<div class="indeterminate"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div id="paper-sim" class="col s12" style="margin-top: 10px">
+				<div style="margin-left: 25px; margin-right: 25px">
+					<div class="divider"></div>
+					<h6><strong>Settings</strong></h6>
+					<div style="overflow-x: auto">
+						<br />
+						<table class="centered">
+							<tr>
+							<tbody>
+								<tr id="paramsrow">
+									<td><em>nax</em><sub>ax</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="nax_ax"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="nax_ax"></label>
+										</div>
+									</td>
+									<td><em>na3</em><sub>soma</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="na3_soma"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="na3_soma"></label>
+										</div>
+									</td>
+									<td><em>na3</em><sub>dend</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="na3_dend"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="na3_dend"></label>
+										</div>
+									</td>
+									<td><em>na3</em><sub>apical</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="na3_apical"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="na3_apical"></label>
+										</div>
+									</td>
+								<tr id="paramsrow">
+									<td><em>kdr</em><sub>ax</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kdr_ax"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kdr_ax"></label>
+										</div>
+									</td>
+									<td><em>kdr</em><sub>soma</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kdr_soma"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kdr_soma"></label>
+										</div>
+									</td>
+									<td><em>kdr</em><sub>dend</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kdr_dend"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kdr_dend"></label>
+										</div>
+									</td>
+									<td><em>kdr</em><sub>apical</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kdr_apical"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kdr_apical"></label>
+										</div>
+									</td>
+								</tr>
+								<tr id="paramsrow">
+									<td><em>kmdb</em><sub>ax</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kmdb_ax"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kmdb_ax"></label>
+										</div>
+									</td>
+									<td><em>kmdb</em><sub>soma</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kmdb_soma"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kmdb_soma"></label>
+										</div>
+									</td>
+									<td><em>kap</em><sub>ax</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kap_ax"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kap_ax"></label>
+										</div>
+									</td>
+									<td><em>kap</em><sub>soma</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kap_soma"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kap_soma"></label>
+										</div>
+									</td>									
+								</tr>
+								<tr id="paramsrow">
+									<td><em>kap</em><sub>dend</sub></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="kap_dend"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="kap_dend"></label>
+										</div>
+									</td>
+									<td><em>valuekad</em></td>
+									<td>
+										<div class="settings input-field col s12">
+											<input type="number"
+												   id="valuekad"
+												   step="0.001"
+												   min="0"
+												   max=""
+												   style="min-width: 55px" />
+											<label for="valuekad"></label>
+										</div>
+									</td>
+								</tr>
+								<tr id="paramsrow">
+									<td>
+										<!-- Switch -->
+										<div class="switch tooltipped"
+											 data-position="top"
+											 data-html="true"
+											 data-tooltip="'Reset' to reproduce Fig. 1B, Fig. 1C and Fig. 1D. 'Set' to insert your own simulation parameters.">
+											<label>
+												<input id="switch" type="checkbox" />
+												<span class="lever"></span>
+												<br />
+												Reset/Set
+												<br />
+												parameters
+											</label>
+										</div>
+									</td>
+									<th style="
+                      border: 1px solid black;
+                      border-color: #e2e2e2;
+                      border-left: none;
+                    "></th>
+									<td>
+										<div class="switch tooltipped"
+											 data-position="top"
+											 data-html="true"
+											 data-tooltip="'Keep lines' to prevent the plots to be cleaned up">
+											<label>
+												<input id="switch-lines" type="checkbox" />
+												<span class="lever"></span>
+												<br />
+												Persistent
+												<br />
+												plots
+											</label>
+										</div>
+									</td>
+
+									<th style="
+                      border: 1px solid black;
+                      border-color: #e2e2e2;
+                      border-right: none;
+                    "></th>
+									<td>
+										<div class="col s5 offset-s1">
+											<button type="submit"
+													style="margin: 6px; width: 120px"
+													class="col s12 waves-effect waves-light btn"
+													id="run">
+												Run
+											</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<label id="message" style="color: red; display: none">**Please select a value between 0 and 5</label>
+								</tr>
+							</tbody>
+							</tr>
+						</table>
+					</div>
+					<br />
+				</div>
+				<br />
+			</div>
+		</div>
+	</div>
+</body>
+</html>
