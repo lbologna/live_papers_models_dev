@@ -234,7 +234,7 @@ function ws_on_error(){
 function ws_on_message(ws, evt, layout_01, title) {
 	// handle received message
 
-	var flag = $('#switch-lines')[0].checked;
+	//var flag = $('#switch-lines')[0].checked;
 
 	var received_msg = JSON.parse(evt.data);
 	console.log("received_msg")
