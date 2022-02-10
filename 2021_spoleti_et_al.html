@@ -244,19 +244,6 @@ function ws_on_message(ws, evt, layout_01, title) {
 	var time = received_msg["data"]["TIME"];
 	var v = received_msg["data"]["v(0.5)"];
 	
-
-	// read current data in plot
-	var datap1 = plotlyChart_01.data;
-	
-	// create empty final data vector
-	var datafinalp1 = [];
-	
-
-	// if plot already present, copy plot data on final vectors
-	if (datap1 && !(datap1[0].x.length == 0)){
-		datafinalp1 = datap1;
-	}
-
       	Plotly.react(plotlyChart_01, [{x:time, y:v}], layout_01);
 		     
 	$('#plot-title')[0].innerHTML = title;
