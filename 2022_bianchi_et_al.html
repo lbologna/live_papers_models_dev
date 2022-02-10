@@ -249,7 +249,7 @@ function ws_on_message(ws, evt, layout_01, title) {
 
 	Plotly.react(plotlyChart_01, [{x:time, y:v,
             name:'nax_ax: '+val_nax_ax+' - na3_soma: '+val_na3_soma+' -na3_dend: '+val_na3_dend+' - na3_apical: '+val_na3_apical+' -kdr_ax: '+val_kdr_ax+' - kdr_soma: '+val_kdr_soma+' -kdr_dend: '+val_kdr_dend+' - kdr_apical: '+val_kdr_apical+' -kmdb_ax: '+val_kmdb_ax+' - kmdb_soma: '+val_kmdb_soma+' -kap_ax: '+val_kap_ax+' - kap_soma: '+val_kap_soma+' -kap_dend: '+val_kap_dend+' - valuekad: '+val_valuekad}], layout_01);
-	}
+
 
 	$('#plot-title')[0].innerHTML = title;
 	$('#error-msg').animate({opacity: 0}, 0);
