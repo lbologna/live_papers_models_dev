@@ -52,7 +52,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-		title = "<h5>WT 3M 0.25nA</h5>";
+		title = "WT 3M 0.25nA";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -68,7 +68,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "<h5>WT 3M 0.5nA</h5>";
+        title = "WT 3M 0.5nA";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -84,7 +84,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "<h5>TG 3M 0.25nA</h5>";
+        title = "TG 3M 0.25nA";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -100,7 +100,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "<h5>TG 3M 0.5nA</h5>";
+        title = "TG 3M 0.5nA";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -116,7 +116,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "<h5>WT 8M 0.25nA</h5>";
+        title = "WT 8M 0.25nA";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -132,7 +132,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "<h5>WT 8M 0.5nA</h5>";
+        title = "WT 8M 0.5nA";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -148,7 +148,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "<h5>TG 8M 0.25nA</h5>";
+        title = "TG 8M 0.25nA";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -164,7 +164,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "<h5>TG 8M 0.5nA</h5>";
+        title = "TG 8M 0.5nA";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -195,8 +195,6 @@ $(document).ready(function () {
 		margin: margin,
 	};
 
-
-	
 	Plotly.newPlot(plotlyChart_01, [{x:[], y:[]}], layout_01, {displayModeBar: false}, {responsive: true});
 	
 	resize_plots();
@@ -204,6 +202,8 @@ $(document).ready(function () {
 	$(window).resize(function(){
 		resize_plots();
 	});
+
+    document.getElementById("#wt230p25").click();
 });
 
 
