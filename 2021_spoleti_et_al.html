@@ -2,27 +2,30 @@
 <html>
 <head>
 	<title>Spoleti et al 2021</title>
-	
+
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <meta name="viewport" content="width = device-width, initial-scale = 1">
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css">
-        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<meta name="viewport" content="width = device-width, initial-scale = 1">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://object.cscs.ch/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2020_mccauley_et_al/mccauley_et_al_2020.css" />
+
+	<!--
 	<link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2021_spoleti_et_al/spoleti_et_al_2021.css" />
 	<link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/resources/css/live_paper.css" />
-	
-	</head>
+	-->
+	<link rel="stylesheet" href="./spoleti_et_al_2021.css" />
+	<link rel="stylesheet" href="./live_paper.css" />
+
+</head>
+
 <script>
 var model_url = 'EBRAINS_live_papers/2021_spoleti_et_al/spoleti_et_al_2021.zip';
-
 
 var default_parameters_wt230p25 = {"h": {'FUNCTIONS': ['WT23_0p25()']}, 'tstop' : 2500, 'v_init': -70};
 var default_parameters_wt230p5 = {"h": {'FUNCTIONS': ['WT23_0p5()']}, 'tstop' : 2500, 'v_init': -70};
@@ -267,8 +270,8 @@ function ws_on_message(ws, evt, layout_01, title) {
 }
 
 function resize_plots(){
-	var plotdiv = document.getElementById("collapsetitle");
-	var plot_width = Math.trunc((plotdiv.offsetWidth-200)/2);
+	var plotdiv = document.getElementById("plots");
+	var plot_width = Math.trunc((plotdiv.offsetWidth-200));
 
 	var plotlyChart_01 = document.getElementById("plotlyChart_01");
 	
@@ -291,15 +294,14 @@ function resize_plots(){
 	<button type="button" id="wt680p5">WT 8m 0.25nA</button> 
 	<button type="button" id="tg680p25">TG 8m 0.2nA</button> 
 	<button type="button" id="tg680p5">WT 8m 0.25nA</button> 
-	<div id="collapsetitle">
+
 		<div class="divider"></div>
-		<div style="position: relative; margin-left: 25px; margin-right: 25px">
-			<div id="plots" class="plots">
-				<div id="plot-title" style="text-align: center"></div>
-				<br />
-				<div class="row">
-					<div class="col s12 offset-s3" id="plotlyChart_01"></div>
-				</div>
+		<div id="plots" class="plots">
+			<div id="plot-title" style="text-align: center"></div>
+			<br />
+			<div class="row">
+				<div id="plotlyChart_01"></div>
+			</div>
 		</div>
 		<div class="overlay" id="error-msg">
 			<div class="loader-class">
@@ -320,7 +322,6 @@ function resize_plots(){
 				</div>
 			</div>
 		</div>
-	</div>
                         
 </body>
 </html>
