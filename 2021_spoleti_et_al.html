@@ -6,7 +6,9 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
 	<meta name="viewport" content="width = device-width, initial-scale = 1">
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -50,7 +52,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-		title = "<h5>Voltage</h5>";
+		title = "<h5>WT 3M 0.25nA</h5>";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -66,7 +68,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-		title = "<h5>Voltage</h5>";
+        title = "<h5>WT 3M 0.5nA</h5>";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -82,7 +84,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-		title = "<h5>Voltage</h5>";
+        title = "<h5>TG 3M 0.25nA</h5>";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -98,7 +100,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-		title = "<h5>Voltage</h5>";
+        title = "<h5>TG 3M 0.5nA</h5>";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -114,7 +116,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-		title = "<h5>Voltage</h5>";
+        title = "<h5>WT 8M 0.25nA</h5>";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -130,7 +132,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-		title = "<h5>Voltage</h5>";
+        title = "<h5>WT 8M 0.5nA</h5>";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -146,7 +148,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-		title = "<h5>Voltage</h5>";
+        title = "<h5>TG 8M 0.25nA</h5>";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -162,7 +164,7 @@ $(document).ready(function () {
 		$('#error-msg').animate({opacity: 0}, 0);
 		$('#plots').animate({opacity: 0}, fadeoutval);
 		$('#loader').animate({opacity: 1}, fadeinval);
-		title = "<h5>Voltage</h5>";
+        title = "<h5>TG 8M 0.5nA</h5>";
 		var xmin = 700;
 		var xmax = 2500;
 		layout_01['xaxis']['autorange'] = false;
@@ -203,30 +205,6 @@ $(document).ready(function () {
 	$(window).resize(function(){
 		resize_plots();
 	});
-
-	//$("#nax_ax,#na3_soma,#na3_dend,#na3_apical,#kdr_ax,#kdr_soma,#kdr_dend,#kdr_apical,#kmdb_ax,#kmdb_soma,#kap_ax,#kap_soma,#kap_dend,#valuekad").keyup(validate_parameters)
-
-	//$("#nax_ax,#na3_soma,#na3_dend,#na3_apical,#kdr_ax,#kdr_soma,#kdr_dend,#kdr_apical,#kmdb_ax,#kmdb_soma,#kap_ax,#kap_soma,#kap_dend,#valuekad").on("change", validate_parameters);
-
-	/*$('#run').click(function() {
-		$('#error-msg').animate({opacity: 0}, 0);
-		$('#plots').animate({opacity: 0}, fadeoutval);
-		$('#loader').animate({opacity: 1}, fadeinval);
-		title = "<h5>Voltage</h5>";
-		var xmin = 700;
-		var xmax = 2500;
-		layout_01['xaxis']['autorange'] = false;
-		layout_01['xaxis']['range'] = [xmin, xmax];
-		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
-		ws.onerror = function(evt){ws_on_error(evt)}
-		ws.onopen = function(){ws_on_open(ws, default_parameters)}
-		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
-		
-	});    
-
-
-
-	$("#run").click();*/
 });
 
 
@@ -285,21 +263,57 @@ function resize_plots(){
 	
 }
 </script>
-<body>
-	<button type="button" id="wt230p25">WT 3m 0.25nA</button> 
-	<button type="button" id="wt230p5">WT 3m 0.5nA</button> 
-	<button type="button" id="tg230p25">TG 3m 0.25nA</button> 
-	<button type="button" id="tg230p5">WT 3m 0.5nA</button> 
-	<button type="button" id="wt680p25">WT 8m 0.2nA</button> 
-	<button type="button" id="wt680p5">WT 8m 0.25nA</button> 
-	<button type="button" id="tg680p25">TG 8m 0.2nA</button> 
-	<button type="button" id="tg680p5">WT 8m 0.25nA</button> 
+<body style="margin:20px">
 
+
+
+	<div class="d-flex align-content-start flex-wrap">
+		A reduced self-consistent set of files needed to reproduce Fig.5A, 5B of the paper is available on ModelDB.
+		<br /><br />
+		The simulations will reproduce the experimental traces of CA1 ventral hippocampal neurons from 3 months-old (Fig.5A) and 8 months-old (Fig.5B) mice,
+		in wild type (WT) and Tg2576 (TG) conditions.
+		<br /><br />
+		The model indicates the depolarization block and the derailment of specific conductances (INa; KDR; KCa) as possible ionic mechanisms underlying
+		the altered excitability at early phase of Alzheimer disease.
+	</div>
+	<div class="d-flex align-content-start flex-wrap how-to">
+		<br />
+		<i>
+			HOWTO:
+			Press buttons in the "3 months-old mice" panel to reproduce the traces in Fig.5A:
+			- The"WT 3m 0.25nA" and "WT 3m 0.5nA" buttons reproduce the 3-months WT cell's trace at 0.25nA and 0.5nA respectively
+			- The "TG 3m 0.25nA" and "TG 3m 0.5nA" buttons reproduce the 3-months TG cell's trace at 0.25nA and 0.5nA respectively
+			<br />
+			Press buttons in the "8 months-old mice" panel to reproduce the traces in Fig.5B:
+			- The "WT 8m 0.2nA" and 'WT 8m 0.25nA" buttons reproduce the 8-months WT cell's trace at 0.2nA and 0.25nA respectively
+			- The "TG 8m 0.2nA" and 'TG 8m 0.25nA" buttons reproduce the 8-months TG cell's trace at 0.2nA and 0.25nA respectively
+		</i>
+	</div>
+	<div class="btn-panel">
+		<h5>3 months-old mice</h5>
+		<div class="d-flex justify-content-center">
+
+			<br>
+			<button type="button" class="btn btn-primary btn-sim" id="wt230p25">WT 3m 0.25nA</button>
+			<button type="button" class="btn btn-primary btn-sim" id="wt230p5">WT 3m 0.5nA</button>
+			<button type="button" class="btn btn-primary btn-sim" id="tg230p25">TG 3m 0.25nA</button>
+			<button type="button" class="btn btn-primary btn-sim" id="tg230p5">TG 3m 0.5nA</button>
+		</div>
+	</div>
+	<div class="btn-panel">
+		<h5>8 months-old mice</h5>
+		<div class="d-flex justify-content-center">
+			<button type="button" class="btn btn-primary btn-sim" id="wt680p25">WT 8m 0.25nA</button>
+			<button type="button" class="btn btn-primary btn-sim" id="wt680p5">WT 8m 0.5nA</button>
+			<button type="button" class="btn btn-primary btn-sim" id="tg680p25">TG 8m 0.25nA</button>
+			<button type="button" class="btn btn-primary btn-sim" id="tg680p5">TG 8m 0.5nA</button>
+		</div>
+	</div>
 		<div class="divider"></div>
 		<div id="plots" class="plots">
 			<div id="plot-title" style="text-align: center"></div>
 			<br />
-			<div class="row">
+			<div class="row d-flex justify-content-center">
 				<div id="plotlyChart_01"></div>
 			</div>
 		</div>
@@ -322,6 +336,9 @@ function resize_plots(){
 				</div>
 			</div>
 		</div>
-                        
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
