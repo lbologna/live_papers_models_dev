@@ -236,7 +236,7 @@ function ws_on_message(ws, evt, layout_01, title) {
 	console.log(received_msg)
 	var time = received_msg["data"]["TIME"];
 	var v = received_msg["data"]["v(0.5)"];
-	layout_01["tite"] = title;
+	layout_01["title"] = title;
 	
       	Plotly.react(plotlyChart_01, [{x:time, y:v}], layout_01);
 		     
