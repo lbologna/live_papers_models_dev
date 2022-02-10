@@ -236,10 +236,11 @@ function ws_on_message(ws, evt, layout_01, title) {
 	console.log(received_msg)
 	var time = received_msg["data"]["TIME"];
 	var v = received_msg["data"]["v(0.5)"];
+	layout_01["tite"] = title;
 	
       	Plotly.react(plotlyChart_01, [{x:time, y:v}], layout_01);
 		     
-	$('#plot-title')[0].innerHTML = title;
+	//$('#plot-title')[0].innerHTML = title;
 	$('#error-msg').animate({opacity: 0}, 0);
 	$('#plots').animate({opacity: 1}, fadeinval);
 	$('#loader').animate({opacity: 0}, fadeoutval);
