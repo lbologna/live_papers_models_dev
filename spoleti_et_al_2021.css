@@ -47,18 +47,38 @@
 
 .btn-sim {
     margin: 5px;
+    min-width: 200px;
 }
 .btn-panel {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     padding-top: 5px;
-    margin-bottom: 15px;
     background-color: beige;
     text-align: center;
     margin-bottom: 15px;
     margin-top: 15px;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
+
+.btn-param {
+    margin-left: 6px;
+    margin-right: 6px;
+    background-color: rgb(245, 245, 245);
+    border-radius:10px;
+    border-color: rgb(230, 230, 230);
+    border-style: solid;
+    border-width: 1px;
+}
+.param-panel {
+    padding-bottom: 10px;
+    padding-top: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
 
 .how-to {
     margin-top: 25px;

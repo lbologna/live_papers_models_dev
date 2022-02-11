@@ -33,7 +33,6 @@ var default_parameters_wt230p25 = {"h": {'FUNCTIONS': ['WT23_0p25()']}, 'tstop' 
 var default_parameters_wt230p5 = {"h": {'FUNCTIONS': ['WT23_0p5()']}, 'tstop' : 2500, 'v_init': -70};
 var default_parameters_tg230p25 = {"h": {'FUNCTIONS': ['TG23_0p25()']}, 'tstop' : 2500, 'v_init': -70};
 var default_parameters_tg230p5 = {"h": {'FUNCTIONS': ['TG23_0p5()']}, 'tstop' : 2500, 'v_init': -70};
-
 var default_parameters_wt680p25 = {"h": {'FUNCTIONS': ['WT68_0p2()']}, 'tstop' : 2500, 'v_init': -70};
 var default_parameters_wt680p5 = {"h": {'FUNCTIONS': ['WT68_0p25()']}, 'tstop' : 2500, 'v_init': -70};
 var default_parameters_tg680p25 = {"h": {'FUNCTIONS': ['TG68_0p2()']}, 'tstop' : 2500, 'v_init': -70};
@@ -45,135 +44,121 @@ var recorded_vectors = {'TIME': 't', 'v(0.5)' : 'v'};
 var fadeinval = 1200;
 var fadeoutval = 600;
 
+	var nrn_func = "WT23_0p25()";
+	var plot_title = "WT 3M 0.25nA";
+	var amp = 0.25;
 
-$(document).ready(function () {
+	$(document).ready(function () {
 
-	$("#wt230p25").click(function() {
-		$('#error-msg').animate({opacity: 0}, 0);
-		$('#plots').animate({opacity: 0}, fadeoutval);
-		$('#loader').animate({opacity: 1}, fadeinval);
-		title = "WT 3M 0.25nA";
-		var xmin = 700;
-		var xmax = 2500;
-		layout_01['xaxis']['autorange'] = false;
-		layout_01['xaxis']['range'] = [xmin, xmax];
-		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
-		ws.onerror = function(evt){ws_on_error(evt)}
-		ws.onopen = function(){ws_on_open(ws, default_parameters_wt230p25)}
-		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
-		
-	}); 
+    $("#run-btn").click(function () {
+        $('#error-msg').animate({ opacity: 0 }, 0);
+        $('#plots').animate({ opacity: 0 }, fadeoutval);
+        $('#loader').animate({ opacity: 1 }, fadeinval);
+        var xmin = 700;
+        var xmax = 2500;
+        layout_01['xaxis']['autorange'] = false;
+        layout_01['xaxis']['range'] = [xmin, xmax];
+        var default_parameters = {
+            "h": {
+                "kdr_allnoax": parseFloat($("#kdr_allnoax").val()), "kca_allnoax": parseFloat($("#kca_allnoax").val()), "stim": { "amp": amp }, 'FUNCTIONS': ['WT23_0p25()']
+            }
+        };
 
-    $("#wt230p5").click(function() {
-		$('#error-msg').animate({opacity: 0}, 0);
-		$('#plots').animate({opacity: 0}, fadeoutval);
-		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "WT 3M 0.5nA";
-		var xmin = 700;
-		var xmax = 2500;
-		layout_01['xaxis']['autorange'] = false;
-		layout_01['xaxis']['range'] = [xmin, xmax];
-		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
-		ws.onerror = function(evt){ws_on_error(evt)}
-		ws.onopen = function(){ws_on_open(ws, default_parameters_wt230p5)}
-		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
-		
+        var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
+        ws.onerror = function (evt) { ws_on_error(evt) }
+        ws.onopen = function () { ws_on_open(ws, default_parameters) }
+        ws.onmessage = function (evt) { ws_on_message(ws, evt, layout_01, plot_title) }
+
+
+	});
+
+	$("#wt230p25").click(function () {
+		$("#kdr_allnoax").focus();
+        $("#kdr_allnoax").val("0.004");
+        $("#kca_allnoax").focus();
+		$("#kca_allnoax").val("7e-06");
+        $("#run-btn").focus();
+		nrn_func = "WT23_0p25()";
+		plot_title = "WT 3M 0.25nA";
+        amp = 0.25;
+    });
+
+
+    $("#wt230p5").click(function () {
+        $("#kdr_allnoax").focus();
+        $("#kdr_allnoax").val("0.0044");
+        $("#kca_allnoax").focus();
+        $("#kca_allnoax").val("7e-06");
+        $("#run-btn").focus();
+        nrn_func = "WT23_0p5()";
+        plot_title = "WT 3M 0.5nA";
+        amp = 0.5;
 	}); 
 	
-    $("#tg230p25").click(function() {
-		$('#error-msg').animate({opacity: 0}, 0);
-		$('#plots').animate({opacity: 0}, fadeoutval);
-		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "TG 3M 0.25nA";
-		var xmin = 700;
-		var xmax = 2500;
-		layout_01['xaxis']['autorange'] = false;
-		layout_01['xaxis']['range'] = [xmin, xmax];
-		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
-		ws.onerror = function(evt){ws_on_error(evt)}
-		ws.onopen = function(){ws_on_open(ws, default_parameters_tg230p25)}
-		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
-		
+    $("#tg230p25").click(function () {
+        $("#kdr_allnoax").focus();
+        $("#kdr_allnoax").val("0.00444");
+        $("#kca_allnoax").focus();
+        $("#kca_allnoax").val("7e-06");
+        $("#run-btn").focus();
+        nrn_func = "TG23_0p25()";
+        plot_title = "TG 3M 0.25nA";
+        amp = 0.25;
 	});
 	
-	$("#tg230p5").click(function() {
-		$('#error-msg').animate({opacity: 0}, 0);
-		$('#plots').animate({opacity: 0}, fadeoutval);
-		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "TG 3M 0.5nA";
-		var xmin = 700;
-		var xmax = 2500;
-		layout_01['xaxis']['autorange'] = false;
-		layout_01['xaxis']['range'] = [xmin, xmax];
-		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
-		ws.onerror = function(evt){ws_on_error(evt)}
-		ws.onopen = function(){ws_on_open(ws, default_parameters_tg230p5)}
-		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
-		
+    $("#tg230p5").click(function () {
+        $("#kdr_allnoax").focus();
+        $("#kdr_allnoax").val("0.004444");
+        $("#kca_allnoax").focus();
+        $("#kca_allnoax").val("7e-06");
+        $("#run-btn").focus();
+        nrn_func = "TG23_0p5()";
+        plot_title = "TG 3M 0.5nA";
+        amp = 0.5;
 	}); 
 	
-	$("#wt680p25").click(function() {
-		$('#error-msg').animate({opacity: 0}, 0);
-		$('#plots').animate({opacity: 0}, fadeoutval);
-		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "WT 8M 0.25nA";
-		var xmin = 700;
-		var xmax = 2500;
-		layout_01['xaxis']['autorange'] = false;
-		layout_01['xaxis']['range'] = [xmin, xmax];
-		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
-		ws.onerror = function(evt){ws_on_error(evt)}
-		ws.onopen = function(){ws_on_open(ws, default_parameters_wt680p25)}
-		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
-		
+    $("#wt680p25").click(function () {
+        $("#kdr_allnoax").focus();
+        $("#kdr_allnoax").val("0.0044444");
+        $("#kca_allnoax").focus();
+        $("#kca_allnoax").val("7e-06");
+        $("#run-btn").focus();
+        nrn_func = "WT68_0p2()";
+        plot_title = "WT 8M 0.25nA";
+        amp = 0.25;
 	}); 
 	
-	$("#wt680p5").click(function() {
-		$('#error-msg').animate({opacity: 0}, 0);
-		$('#plots').animate({opacity: 0}, fadeoutval);
-		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "WT 8M 0.5nA";
-		var xmin = 700;
-		var xmax = 2500;
-		layout_01['xaxis']['autorange'] = false;
-		layout_01['xaxis']['range'] = [xmin, xmax];
-		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
-		ws.onerror = function(evt){ws_on_error(evt)}
-		ws.onopen = function(){ws_on_open(ws, default_parameters_wt680p5)}
-		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
-		
+    $("#wt680p5").click(function () {
+        $("#kdr_allnoax").focus();
+        $("#kdr_allnoax").val("0.00444444");
+        $("#kca_allnoax").focus();
+        $("#kca_allnoax").val("7e-06");
+        $("#run-btn").focus();
+        nrn_func = "WT68_0p25()";
+        plot_title = "WT 8M 0.5nA";
+        amp = 0.5;
 	}); 
 	
-	$("#tg680p25").click(function() {
-		$('#error-msg').animate({opacity: 0}, 0);
-		$('#plots').animate({opacity: 0}, fadeoutval);
-		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "TG 8M 0.25nA";
-		var xmin = 700;
-		var xmax = 2500;
-		layout_01['xaxis']['autorange'] = false;
-		layout_01['xaxis']['range'] = [xmin, xmax];
-		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
-		ws.onerror = function(evt){ws_on_error(evt)}
-		ws.onopen = function(){ws_on_open(ws, default_parameters_tg680p25)}
-		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
-		
+    $("#tg680p25").click(function () {
+        $("#kdr_allnoax").focus();
+        $("#kdr_allnoax").val("0.004444444");
+        $("#kca_allnoax").focus();
+        $("#kca_allnoax").val("7e-06");
+        $("#run-btn").focus();
+		nrn_func = "TG68_0p2()";
+        plot_title = "TG 8M 0.25nA";
+        amp = 0.25;
 	}); 
 	
-	$("#tg680p5").click(function() {
-		$('#error-msg').animate({opacity: 0}, 0);
-		$('#plots').animate({opacity: 0}, fadeoutval);
-		$('#loader').animate({opacity: 1}, fadeinval);
-        title = "TG 8M 0.5nA";
-		var xmin = 700;
-		var xmax = 2500;
-		layout_01['xaxis']['autorange'] = false;
-		layout_01['xaxis']['range'] = [xmin, xmax];
-		var ws = new WebSocket('wss://blue-naas-svc-bsp-epfl.apps.hbp.eu/ws');
-		ws.onerror = function(evt){ws_on_error(evt)}
-		ws.onopen = function(){ws_on_open(ws, default_parameters_tg680p5)}
-		ws.onmessage = function(evt){ws_on_message(ws, evt, layout_01,  title)}
-		
+    $("#tg680p5").click(function () {
+        $("#kdr_allnoax").focus();
+        $("#kdr_allnoax").val("0.0044444444");
+        $("#kca_allnoax").focus();
+        $("#kca_allnoax").val("7e-06");
+        $("#run-btn").focus();
+        nrn_func = "TG68_0p25()";
+        plot_title = "TG 8M 0.5nA";
+        amp = 0.5;
 	}); 
 	var plotlyChart_01 = document.getElementById("plotlyChart_01");
 	
@@ -286,59 +271,77 @@ function resize_plots(){
 			- The "TG 8m 0.2nA" and 'TG 8m 0.25nA" buttons reproduce the 8-months TG cell's trace at 0.2nA and 0.25nA respectively
 		</i>
 
-		<b>NOTE: the online simulator might run with a NEURON version different than the one used for the simulations reported in the paper.
-		Hence, you might see minor differences in the simulated activity (e.g., number of spikes).</b>
+		NOTE: the online simulator might run with a NEURON version different than the one used for the simulations reported in the paper.
+		Hence, you might see minor differences in the simulated activity (e.g., number of spikes).
 	</div>
-	<div class="btn-panel">
-		<h5>3 months-old mice</h5>
-		<div class="d-flex justify-content-center">
 
-			<br>
-			<button type="button" class="btn btn-primary btn-sim" id="wt230p25">WT 0.25nA</button>
-			<button type="button" class="btn btn-primary btn-sim" id="wt230p5">WT 0.5nA</button>
-			<button type="button" class="btn btn-primary btn-sim" id="tg230p25">TG 0.25nA</button>
-			<button type="button" class="btn btn-primary btn-sim" id="tg230p5">TG 0.5nA</button>
-		</div>
-	</div>
-	<div class="btn-panel">
-		<h5>8 months-old mice</h5>
-		<div class="d-flex justify-content-center">
-			<button type="button" class="btn btn-primary btn-sim" id="wt680p25">WT 0.25nA</button>
-			<button type="button" class="btn btn-primary btn-sim" id="wt680p5">WT 0.5nA</button>
-			<button type="button" class="btn btn-primary btn-sim" id="tg680p25">TG 0.25nA</button>
-			<button type="button" class="btn btn-primary btn-sim" id="tg680p5">TG 0.5nA</button>
-		</div>
-	</div>
-	<div class="divider"></div>
-	<div style="position:relative">
-		<div class="overlay" id="error-msg">
-			<div class="loader-class">
-				<div style="text-align: center" class="row">
-					An error occurred while connecting to the server
-					<br />
-					Please try again in a few seconds
+
+	<div class="container">
+		<div class="row">
+			<div class="btn-panel col-sm">
+				<h6><strong>3 months-old mice</h6></strong>
+				<div class="d-flex justify-content-center">
+					<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="wt230p25">WT 0.25nA</button>
+					<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="wt230p5">WT 0.5nA</button>
+					<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="tg230p25">TG 0.25nA</button>
+					<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="tg230p5">TG 0.5nA</button>
+				</div>
+			</div>
+			<div class="btn-panel col-sm">
+				<h6><strong>8 months-old mice</h6></strong>
+				<div class="d-flex justify-content-center">
+					<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="wt680p25">WT 0.25nA</button>
+					<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="wt680p5">WT 0.5nA</button>
+					<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="tg680p25">TG 0.25nA</button>
+					<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="tg680p5">TG 0.5nA</button>
 				</div>
 			</div>
 		</div>
-		<div class="overlay" id="loader">
-			<div class="loader-class">
-				<div style="text-align: center" class="row">
-					Launching simulation. Please wait ...
-					<div class="progress">
-						<div class="indeterminate"></div>
+	</div>
+	<div class="row valign-wrapper param-panel">
+
+			<div class="input-field col s6">
+				<input id="kdr_allnoax" type="number" class="validate" step="0.001">
+				<label style="font-size:22px" for="kdr_allnoax"><em>kdr</em><sub>allnoax</sub></label>
+			</div>
+			<div class="input-field col s6">
+				<input id="kca_allnoax" type="number" class="validate" step="0.001">
+				<label style="font-size:22px" for="kca_allnoax"><em>kca</em><sub>allnoax</sub></label>
+			</div>
+			<button id="run-btn" class="waves-effect waves-light btn btn-sim">Run</button>
+	</div>
+
+
+
+		<div style="position:relative">
+			<div class="overlay" id="error-msg">
+				<div class="loader-class">
+					<div style="text-align: center" class="row">
+						An error occurred while connecting to the server
+						<br />
+						Please try again in a few seconds
 					</div>
 				</div>
 			</div>
-		</div>
-		<div id="plots" class="plots">
-			<div id="plot-title" style="text-align: center"></div>
-			<br />
-			<div class="row d-flex justify-content-center">
-				<div id="plotlyChart_01"></div>
+			<div class="overlay" id="loader">
+				<div class="loader-class">
+					<div style="text-align: center" class="row">
+						Launching simulation. Please wait ...
+						<div class="progress">
+							<div class="indeterminate"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="plots" class="plots">
+				<div id="plot-title" style="text-align: center"></div>
+				<br />
+				<div class="row d-flex justify-content-center">
+					<div id="plotlyChart_01"></div>
+				</div>
 			</div>
 		</div>
-	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
