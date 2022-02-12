@@ -68,6 +68,7 @@
     border-color: rgb(230, 230, 230);
     border-style: solid;
     border-width: 1px;
+    min-width: 100px;
 }
 .param-panel {
     padding-bottom: 10px;
@@ -75,11 +76,15 @@
     text-align: center;
     margin-bottom: 15px;
     margin-top: 15px;
-    margin-left: 300px;
-    margin-right: 300px;
+    margin-left: 200px;
+    margin-right: 200px;
 }
 
 
 .how-to {
     margin-top: 25px;
+}
+
+.input-div {
+    min-width: 200px;
 }
