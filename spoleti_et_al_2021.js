@@ -19,8 +19,9 @@ btns_params = {
     "tg680p25": ["3.00e-05", "2.00e-04", "TG68_0p25()", "TG 8M 0.25nA", 0.25],
 }
 
-$(document).ready(function () {
 
+$(document).ready(function () {
+    
     $("#run-btn").click(function () {
         $('#error-msg').animate({ opacity: 0 }, 0);
         $('#plots').animate({ opacity: 0 }, fadeoutval);
@@ -33,6 +34,7 @@ $(document).ready(function () {
         // set input edit values
         var kdr_allnoax = parseFloat($("#kdr_allnoax").val());
         var kca_allnoax = parseFloat($("#kca_allnoax").val());
+        var amp = parseFloat($("#i_inj").val());
         var default_parameters = {
             "h": { "kdr_allnoax": kdr_allnoax, "kca_allnoax": kca_allnoax, "stim": { "amp": amp }, 'FUNCTIONS': [nrn_func] }
         };
@@ -86,9 +88,9 @@ function assign_params(btn_id) {
     $("#kdr_allnoax").val(btns_params[btn_id][0]);
     $("#kca_allnoax").focus();
     $("#kca_allnoax").val(btns_params[btn_id][1]);
+    $("#i_inj").val(btns_params[btn_id][4]);
     nrn_func = btns_params[btn_id][2];
     plot_title = btns_params[btn_id][3];
-    amp = btns_params[btn_id][4];
     $("#run-btn").focus();
 }
 

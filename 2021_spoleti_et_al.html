@@ -17,13 +17,13 @@
 <link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2021_spoleti_et_al/spoleti_et_al_2021.css" />
 <link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/resources/css/live_paper.css" />
 <script type="text/javascript" src="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2021_spoleti_et_al/spoleti_et_al_2021.js"></script>
-
 </head>
 
 
 <body>
 <div class="d-flex align-content-start flex-wrap">
-A reduced self-consistent set of files needed to reproduce Fig.5A, 5B of the paper is available on ModelDB.
+
+A reduced self-consistent set of files needed to reproduce Fig.5A, 5B of the paper is available on <a target="_blank" href="https://senselab.med.yale.edu/ModelDB/showmodel?model=267066#tabs-1">ModelDB</a>.
 <br /><br />
 The simulations will reproduce the experimental traces of CA1 ventral hippocampal neurons from 3 months-old (Fig.5A) and 8 months-old (Fig.5B) mice,
 in wild type (WT) and Tg2576 (TG) conditions.
@@ -56,37 +56,39 @@ Hence, you might see minor differences in the simulated activity (e.g., number o
 <div class="btn-panel col-sm">
 <h6><strong>3 months-old mice</h6></strong>
 <div class="d-flex justify-content-center">
-<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="wt230p25">WT 0.25nA</button>
-<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="wt230p5">WT 0.5nA</button>
-<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="tg230p25">TG 0.25nA</button>
-<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="tg230p5">TG 0.5nA</button>
+<button type="button" class="btn-param" id="wt230p25">WT 0.25nA</button>
+<button type="button" class="btn-param" id="wt230p5">WT 0.5nA</button>
+<button type="button" class="btn-param" id="tg230p25">TG 0.25nA</button>
+<button type="button" class="btn-param" id="tg230p5">TG 0.5nA</button>
 </div>
 </div>
 <div class="btn-panel col-sm">
 <h6><strong>8 months-old mice</h6></strong>
 <div class="d-flex justify-content-center">
-<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="wt680p2">WT 0.2nA</button>
-<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="wt680p25">WT 0.25nA</button>
-<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="tg680p2">TG 0.2nA</button>
-<button type="button" class="col s3 waves-effect waves-teal btn-flat btn-param" id="tg680p25">TG 0.25nA</button>
+<button type="button" class="btn-param" id="wt680p2">WT 0.2nA</button>
+<button type="button" class="btn-param" id="wt680p25">WT 0.25nA</button>
+<button type="button" class="btn-param" id="tg680p2">TG 0.2nA</button>
+<button type="button" class="btn-param" id="tg680p25">TG 0.25nA</button>
 </div>
 </div>
 </div>
 </div>
 <div class="row valign-wrapper param-panel">
 
-<div class="input-field col s6 input-div">
-<input id="kdr_allnoax" type="number" class="validate" step="0.001">
-<label style="font-size:22px" for="kdr_allnoax"><em>kdr</em><sub>allnoax</sub></label>
+ <div class="input-field col s3 input-div">
+ <input id="kdr_allnoax" type="number" class="validate" step="0.001" min="0" max="">
+ <label class="edit-label" for="kdr_allnoax"><em>kdr</em><sub>allnoax</sub></label>
+ </div>
+ <div class="input-field col s3 input-div">
+ <input id="kca_allnoax" type="number" class="validate" step="0.001" min="0" max="">
+ <label class="edit-label" for="kca_allnoax"><em>kca</em><sub>allnoax</sub></label>
+ </div>
+ <div class="input-field col s3 input-div">
+ <input id="i_inj" type="number" class="validate" step="0.001" min="0" max="">
+ <label class="edit-label" for="i_inj"><em>I<sub>inj</sub> (nA)</em></label>
+ </div>
+ <button id="run-btn" class="waves-effect waves-light btn btn-sim">Run</button>
 </div>
-<div class="input-field col s6 input-div">
-<input id="kca_allnoax" type="number" class="validate" step="0.001">
-<label style="font-size:22px" for="kca_allnoax"><em>kca</em><sub>allnoax</sub></label>
-</div>
-<button id="run-btn" class="waves-effect waves-light btn btn-sim">Run</button>
-</div>
-
-
 
 <div style="position:relative">
 <div class="overlay" id="error-msg">
