@@ -5,30 +5,30 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <meta name="viewport" content="width = device-width, initial-scale = 1">
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2021_spoleti_et_al/spoleti_et_al_2021.css" />
 <link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/resources/css/live_paper.css" />
+
 <script type="text/javascript" src="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2021_spoleti_et_al/spoleti_et_al_2021.js"></script>
+
 </head>
 
 
 <body>
-<div class="d-flex align-content-start flex-wrap">
+<div class="">
 
 A reduced self-consistent set of files needed to reproduce Fig.5A, 5B of the paper is available on <a target="_blank" href="https://senselab.med.yale.edu/ModelDB/showmodel?model=267066#tabs-1">ModelDB</a>.
 <br /><br />
 The simulations will reproduce the experimental traces of CA1 ventral hippocampal neurons from 3 months-old (Fig.5A) and 8 months-old (Fig.5B) mice,
 in wild type (WT) and Tg2576 (TG) conditions.
 <br /><br />
-The model indicates the depolarization block and the derailment of specific conductances (INa; KDR; KCa) as possible ionic mechanisms underlying
+The model indicates the depolarization block and the derailment of specific conductances (<em>I<sub>Na</sub></em>; <em>K<sub>DR</sub></em>; <em>K<sub>Ca</sub></em>) as possible ionic mechanisms underlying
 the altered excitability at early phase of Alzheimer disease.
 </div>
 <div class="d-flex align-content-start flex-wrap how-to">
@@ -36,16 +36,27 @@ the altered excitability at early phase of Alzheimer disease.
 <i>
 HOWTO:
 Press buttons in the "3 months-old mice" panel to set the parameters used to obtain the traces in Fig.5A and then click "Run":
-- The"WT 3m 0.25nA" and "WT 3m 0.5nA" buttons will allow to reproduce the 3-months WT cell's trace at 0.25nA and 0.5nA respectively
-- The "TG 3m 0.25nA" and "TG 3m 0.5nA" buttons will allow to reproduce the 3-months TG cell's trace at 0.25nA and 0.5nA respectively
-<br />
+<ul>
+<li>
+The"WT 3m 0.25nA" and "WT 3m 0.5nA" buttons will allow to reproduce the 3-months WT cell's trace at 0.25nA and 0.5nA respectively
+</li>
+<li>
+The "TG 3m 0.25nA" and "TG 3m 0.5nA" buttons will allow to reproduce the 3-months TG cell's trace at 0.25nA and 0.5nA respectively
+</li>
+</ul>
 Press buttons in the "8 months-old mice" panel to set the parameters used to obtain the traces in Fig.5B:
-- The "WT 8m 0.2nA" and 'WT 8m 0.25nA" buttons will allow to reproduce the 8-months WT cell's trace at 0.2nA and 0.25nA respectively
-- The "TG 8m 0.2nA" and 'TG 8m 0.25nA" buttons will allow to reproduce the 8-months TG cell's trace at 0.2nA and 0.25nA respectively
+<ul>
+<li>
+The "WT 8m 0.2nA" and 'WT 8m 0.25nA" buttons will allow to reproduce the 8-months WT cell's trace at 0.2nA and 0.25nA respectively
+</li>
+<li>
+The "TG 8m 0.2nA" and 'TG 8m 0.25nA" buttons will allow to reproduce the 8-months TG cell's trace at 0.2nA and 0.25nA respectively
 <br />
+</li>
+</ul>
 Additionally, you can set the <em>kca</em><sub>allnoax</sub> and the <em>kca</em><sub>allnoax</sub> conductances to explore the model behavior.
 </i>
-
+<br /><br />
 NOTE: the online simulator might run with a NEURON version different than the one used for the simulations reported in the paper.
 Hence, you might see minor differences in the simulated activity (e.g., number of spikes).
 </div>
@@ -55,6 +66,7 @@ Hence, you might see minor differences in the simulated activity (e.g., number o
 <div class="row">
 <div class="btn-panel col-sm">
 <h6><strong>3 months-old mice</h6></strong>
+
 <div class="d-flex justify-content-center">
 <button type="button" class="btn-param" id="wt230p25">WT 0.25nA</button>
 <button type="button" class="btn-param" id="wt230p5">WT 0.5nA</button>
@@ -75,20 +87,23 @@ Hence, you might see minor differences in the simulated activity (e.g., number o
 </div>
 <div class="row valign-wrapper param-panel">
 
- <div class="input-field col s3 input-div">
- <input id="kdr_allnoax" type="number" class="validate" step="0.001" min="0" max="">
- <label class="edit-label" for="kdr_allnoax"><em>kdr</em><sub>allnoax</sub></label>
- </div>
- <div class="input-field col s3 input-div">
- <input id="kca_allnoax" type="number" class="validate" step="0.001" min="0" max="">
- <label class="edit-label" for="kca_allnoax"><em>kca</em><sub>allnoax</sub></label>
- </div>
- <div class="input-field col s3 input-div">
- <input id="i_inj" type="number" class="validate" step="0.001" min="0" max="">
- <label class="edit-label" for="i_inj"><em>I<sub>inj</sub> (nA)</em></label>
- </div>
- <button id="run-btn" class="waves-effect waves-light btn btn-sim">Run</button>
+<div class="input-field col s3 input-div">
+<input id="kdr_allnoax" type="number" class="form-control" step="0.001" min="0" max="">
+<label class="form-label" for="kdr_allnoax"><em>kdr</em><sub>allnoax</sub></label>
 </div>
+<div class="input-field col s3 input-div">
+<input id="kca_allnoax" type="number" class="form-control" step="0.001" min="0" max="">
+<label class="form-label" for="kca_allnoax"><em>kca</em><sub>allnoax</sub></label>
+</div>
+<div class="input-field col s3 input-div">
+<input id="i_inj" type="number" class="form-control" step="0.001" min="0" max="">
+<label class="form-label" for="i_inj"><em>I<sub>inj</sub> (nA)</em></label>
+</div>
+</div>
+<div class="d-flex justify-content-center">
+<button id="run-btn" class="btn btn-success btn-sim">Run</button>
+</div>
+
 
 <div style="position:relative">
 <div class="overlay" id="error-msg">
@@ -102,13 +117,15 @@ Please try again in a few seconds
 </div>
 <div class="overlay" id="loader">
 <div class="loader-class">
+
 <div style="text-align: center" class="row">
-Launching simulation. Please wait ...
-<div class="progress">
-<div class="indeterminate"></div>
+<div class="spinner-grow" role="status"></div>
+Running simulation<br>Please wait ...
 </div>
 </div>
-</div>
+
+
+
 </div>
 <div id="plots" class="plots">
 <div id="plot-title" style="text-align: center"></div>

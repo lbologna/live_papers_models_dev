@@ -47,7 +47,7 @@
 
 .btn-sim {
     margin: 5px;
-    min-width: 100px;
+    min-width: 400px;
 }
 .btn-panel {
     padding-bottom: 10px;
@@ -91,4 +91,5 @@
 
 .input-div {
     min-width: 100px;
+    max-width: 200px;
 }
