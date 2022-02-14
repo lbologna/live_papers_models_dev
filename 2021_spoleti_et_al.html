@@ -5,6 +5,9 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <meta name="viewport" content="width = device-width, initial-scale = 1">
 <meta charset="UTF-8">
@@ -89,15 +92,15 @@ Hence, you might see minor differences in the simulated activity (e.g., number o
 
 <div class="input-field col s3 input-div">
 <input id="kdr_allnoax" type="number" class="form-control" step="0.001" min="0" max="">
-<label class="form-label" for="kdr_allnoax"><em>kdr</em><sub>allnoax</sub></label>
+<label class="form-label edit-label" for="kdr_allnoax"><em>kdr</em><sub>allnoax</sub></label>
 </div>
 <div class="input-field col s3 input-div">
 <input id="kca_allnoax" type="number" class="form-control" step="0.001" min="0" max="">
-<label class="form-label" for="kca_allnoax"><em>kca</em><sub>allnoax</sub></label>
+<label class="form-labelv" for="kca_allnoax"><em>kca</em><sub>allnoax</sub></label>
 </div>
 <div class="input-field col s3 input-div">
 <input id="i_inj" type="number" class="form-control" step="0.001" min="0" max="">
-<label class="form-label" for="i_inj"><em>I<sub>inj</sub> (nA)</em></label>
+<label class="form-label edit-label" for="i_inj"><em>I<sub>inj</sub> (nA)</em></label>
 </div>
 </div>
 <div class="d-flex justify-content-center">
@@ -123,8 +126,6 @@ Please try again in a few seconds
 Running simulation<br>Please wait ...
 </div>
 </div>
-
-
 
 </div>
 <div id="plots" class="plots">
