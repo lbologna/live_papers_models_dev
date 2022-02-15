@@ -1,0 +1,94 @@
+.overlay-wrapper {                                                                 
+    display: block;                                                                 
+    position: relative;                                                               
+    width: 100%;                                                                   
+    height: 100%;                                                                  
+    background-color: rgba(0,0,0,0.70);                                            
+    text-align: center;                                                            
+    z-index: 10;                                                                   
+    overflow-y: auto;                                                              
+    padding: 50px;                                                                 
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0);
+  z-index: -1;
+}
+
+.plot-container.plotly {
+    align-items: center;
+    align-content: center;
+}
+
+
+.loader-class {
+ height:100%; 
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+
+.mywrapper {
+}
+.mywrapper:hover div {
+    background-color: #FFFFFF;
+    opacity: 0.6;
+    position: relative;
+}
+
+.plots {
+    display: block;
+}
+
+.btn-sim {
+    margin: 5px;
+    min-width: 400px;
+}
+.btn-panel {
+    padding-bottom: 10px;
+    padding-top: 5px;
+    background-color: beige;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.btn-param {
+    margin-left: 6px;
+    margin-right: 6px;
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+    border-color: rgb(230, 230, 230);
+    border-style: solid;
+    border-width: 1px;
+    min-width: 100px;
+}
+.param-panel {
+    padding-bottom: 10px;
+    padding-top: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.edit-label {
+    font-size: 22px;    
+}
+
+
+.how-to {
+    margin-top: 25px;
+}
+
+.input-div {
+    min-width: 100px;
+}
