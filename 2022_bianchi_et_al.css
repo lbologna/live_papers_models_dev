@@ -93,10 +93,8 @@
     font-size: 18px;
 }
 
-.trace-btn.active {
-    color:ghostwhite;
-    background-color:slategray;
-    margin:3px;
+.btn {
+    text-transform: unset !important;
 }
 
 .param-btn.active {
@@ -112,4 +110,16 @@
 .settings-title {
     background-color:darkslategrey;
     color:antiquewhite;
+}
+
+.checked-trace-button {
+    background-color:darkblue;
+}
+
+.checked-trace-button:hover {
+    background-color: darkblue;
+}
+
+#switch_lab:disabled {
+    background-color: lightgray;
 }

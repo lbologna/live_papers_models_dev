@@ -78,7 +78,6 @@ function check_files_fetch(c, len) {
 //
 $(document).ready(function () {
 
-
     for (let i = 0; i < param_keys.length; i++) {
         $(param_keys[i]).val(param_ids[param_keys[i]][0]);
         $(param_keys[i]).prop("min", 0);
@@ -161,8 +160,12 @@ function update_plot() {
     for (let j = 0; j < static_traces_keys.length; j++) {
         var k = static_traces_keys[j];
         var el = "#" + k;
+        var el_lab = el + "_lab";
         if ($(el)[0].checked) {
             datafinalp1.push(static_traces[k]);
+            $(el_lab).addClass('checked-trace-button');
+        } else {
+            $(el_lab).removeClass('checked-trace-button');
         }
     }
     Plotly.newPlot(plotlyChart_01, datafinalp1, layout_01);
@@ -244,15 +247,20 @@ function validate_parameters() {
 function toggle_btns_for_run(flag) {
     if (flag) {
         for (let i = 0; i < static_traces_keys.length; i++) {
-            $("#"+static_traces_keys[i]).attr('disabled', false);
+            $("#" + static_traces_keys[i]).attr('disabled', false);
+            $("#" + static_traces_keys[i] + "_lab").attr('disabled', false);
         }
         $("#switch").attr('disabled', false);
+        $("#switch_lab").attr('disabled', false);
         $("#run-btn").attr('disabled', false);
     } else {
         for (let i = 0; i < static_traces_keys.length; i++) {
-            $("#" +static_traces_keys[i]).attr('disabled', true);
+            $("#" + static_traces_keys[i]).attr('disabled', true);
+            $("#" + static_traces_keys[i] + "_lab").attr('disabled', true);
+
         }
         $("#switch").attr('disabled', true);
+        $("#switch_lab").attr('disabled', true);
         $("#run-btn").attr('disabled', true);
     }
 }
