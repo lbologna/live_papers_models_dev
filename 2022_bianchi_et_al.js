@@ -47,7 +47,11 @@ var layout_01 = {
     margin: margin,
 };
 
+// dict for static traces
 var static_traces = {};
+
+// initialize counter for static traces fetch
+var counter = 1;
 
 var param_ids = {
     "#nax_ax": ["0.06"], "#na3_soma": ["0.05"], "#na3_dend": ["0.05"], "#na3_apical": ["0.04"], "#kdr_ax": ["0.3"],
@@ -56,24 +60,6 @@ var param_ids = {
 };
 
 var param_keys = Object.keys(param_ids);
-
-// store static traces in dict
-var counter = 1;
-for (let j = 0; j < static_traces_keys.length; j++) {
-    $.getJSON(static_traces_info[static_traces_keys[j]]["url"], function (emp) {
-        var time = emp["time"];
-        var voltage = emp["voltage"];
-        static_traces[static_traces_keys[j]] = { x: time, y: voltage, name: static_traces_info[static_traces_keys[j]]["legend"] };
-        counter += 1;
-        check_files_fetch(counter, static_traces_keys.length);
-    });
-}
-
-function check_files_fetch(c, len) {
-    if (c == len) {
-        console.log(static_traces);
-    }
-}
 
 //
 $(document).ready(function () {
@@ -98,6 +84,9 @@ $(document).ready(function () {
     $("#nax_ax,#na3_soma,#na3_dend,#na3_apical,#kdr_ax,#kdr_soma,#kdr_dend,#kdr_apical,#kmdb_ax,#kmdb_soma,#kap_ax,#kap_soma,#kap_dend,#valuekad").on("change", validate_parameters);
 
     $('#run-btn').click(function () {
+        if (counter == 1) {            
+            get_static_traces();
+        }
         toggle_btns_for_run(false);
         $('#error-msg').animate({ opacity: 0 }, 0);
         $('#plots').animate({ opacity: 0 }, fadeoutval);
@@ -120,7 +109,7 @@ $(document).ready(function () {
     $('#switch').on("change", function () {
         if ($('#switch')[0].checked) {
             for (let i = 0; i < param_keys.length; i++) {
-                $(param_keys[i]).prop('disabled', false);
+                $(param_keys[i]).prop('disabled', false);                
             }
         } else {
             for (let i = 0; i < param_keys.length; i++) {
@@ -128,9 +117,22 @@ $(document).ready(function () {
                 $(param_keys[i]).val(param_ids[param_keys[i]][0]);
             }
         }
+        validate_parameters();
     });
     $("#run-btn").click();
 });
+
+//
+function get_static_traces() {
+    for (let j = 0; j < static_traces_keys.length; j++) {
+        $.getJSON(static_traces_info[static_traces_keys[j]]["url"], function (emp) {
+            var time = emp["time"];
+            var voltage = emp["voltage"];
+            static_traces[static_traces_keys[j]] = { x: time, y: voltage, name: static_traces_info[static_traces_keys[j]]["legend"] };
+            counter += 1;
+        });
+    }
+}
 
 //
 function update_plot() {
@@ -163,9 +165,9 @@ function update_plot() {
         var el_lab = el + "_lab";
         if ($(el)[0].checked) {
             datafinalp1.push(static_traces[k]);
-            $(el_lab).addClass('checked-trace-button');
+            $(el_lab).addClass('checked-trace-btn');
         } else {
-            $(el_lab).removeClass('checked-trace-button');
+            $(el_lab).removeClass('checked-trace-btn');
         }
     }
     Plotly.newPlot(plotlyChart_01, datafinalp1, layout_01);

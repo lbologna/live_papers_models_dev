@@ -87,6 +87,7 @@
 
 .input-field {
     max-width: 100px;
+    min-width: 60px;
 }
 
 .settings-name {
@@ -112,14 +113,25 @@
     color:antiquewhite;
 }
 
-.checked-trace-button {
-    background-color:darkblue;
+.trace-btn {
 }
 
-.checked-trace-button:hover {
-    background-color: darkblue;
+.trace-check:hover {
+    background-color: dodgerblue;
 }
 
 #switch_lab:disabled {
-    background-color: lightgray;
+    background-color: dodgerblue;
 }
+
+.checked-trace-btn {
+    background-color: dodgerblue;
+}
+
+    .checked-trace-btn:hover {
+        background-color: dodgerblue;
+    }
+
+    .checked-trace-btn:checked {
+        background-color: dodgerblue;
+    }

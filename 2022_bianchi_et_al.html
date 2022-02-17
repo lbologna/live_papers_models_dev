@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bianchi et al 2020</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script></body>
+<title>Bianchi et al 2020</title>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <meta name="viewport" content="width = device-width, initial-scale = 1">
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<meta name="viewport" content="width = device-width, initial-scale = 1">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css">
 
 
-    <script type="text/javascript" src="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2022_bianchi_et_al/2022_bianchi_et_al.js"></script>
-    <link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2022_bianchi_et_al/2022_bianchi_et_al.css" />
-    <link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/resources/css/live_paper.css" />
+
+<script type="text/javascript" src="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2022_bianchi_et_al/2022_bianchi_et_al.js"></script>
+<link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2022_bianchi_et_al/2022_bianchi_et_al.css" />
+<link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/resources/css/live_paper.css" />
+
 </head>
 
 <body>
@@ -46,12 +45,10 @@ Hence, you might see minor differences in the simulated activity (e.g., number o
 </div>
 
 <div class="param-panel">
-
 <div class="d-flex justify-content-center">
 <div class="exp-traces-title">Experimental traces</div>
 </div>
 <div class="d-flex justify-content-center">
-
 <div class="btn-group-toggle" data-toggle="buttons">
 <label class="btn btn-secondary trace-btn" for="HM_0_05" id="HM_0_05_lab">
 <input class="trace-check" type="checkbox" id="HM_0_05"> Exp 0.05 nA
@@ -123,7 +120,6 @@ Hence, you might see minor differences in the simulated activity (e.g., number o
 <label for="kdr_ax">&nbsp&nbsp</label>
 </div>
 </td>
-<tr id="paramsrow">
 <td><em>K</em><sub>DR soma</sub></td>
 <td>
 <div class="col s12">
@@ -138,6 +134,9 @@ Hence, you might see minor differences in the simulated activity (e.g., number o
 <label for="kdr_dend"></label>
 </div>
 </td>
+
+</tr>
+<tr id="paramsrow">
 <td><em>K</em><sub>DR apical</sub></td>
 <td>
 <div class="col s12">
@@ -159,9 +158,6 @@ Hence, you might see minor differences in the simulated activity (e.g., number o
 <label for="kmdb_soma"></label>
 </div>
 </td>
-</tr>
-<tr id="paramsrow">
-
 <td><em>K</em><sub>Ap ax</sub></td>
 <td>
 <div class="col s12">
@@ -206,7 +202,7 @@ Hence, you might see minor differences in the simulated activity (e.g., number o
 <div class="d-flex justify-content-center">
 <div class="btn-group-toggle" data-toggle="buttons">
 <label class="btn btn-secondary active param-btn" for="switch" id="switch_lab">
-<input type="checkbox" id="switch"> Reset/Set parameters
+<input type="checkbox" id="switch" /> Reset/Set parameters
 </label>
 </div>
 <button id="run-btn" class="btn btn-success btn-sim param-btn active">Run</button>
@@ -242,8 +238,6 @@ Please try again in a few seconds
 </div>
 </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 </html>
