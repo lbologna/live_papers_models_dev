@@ -90,6 +90,11 @@
     min-width: 60px;
 }
 
+.input-text {
+    max-width: 100px;
+    min-width: 70px;
+}
+
 .settings-name {
     font-size: 18px;
 }
