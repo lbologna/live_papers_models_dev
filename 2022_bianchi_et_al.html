@@ -1,243 +1,219 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bianchi et al 2020</title>
+    <title>Bianchi et al 2020</title>
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://object.cscs.ch/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/resources/css/live_paper.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular-resource.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-nvd3/1.0.9/angular-nvd3.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/NeuralEnsemble/neo-viewer@master/js/angularjs/src/visualizer.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/NeuralEnsemble/neo-viewer@master/js/angularjs/src/services.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-
-<script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<meta name="viewport" content="width = device-width, initial-scale = 1">
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.min.css">
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-<script type="text/javascript" src="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2022_bianchi_et_al/2022_bianchi_et_al.js"></script>
-<link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2022_bianchi_et_al/2022_bianchi_et_al.css" />
-<link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/resources/css/live_paper.css" />
-
+    <script type="text/javascript" src="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2022_bianchi_et_al/2022_bianchi_et_al.js"></script>
+    <link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/2022_bianchi_et_al/2022_bianchi_et_al.css" />
+    <link rel="stylesheet" href="https://object.cscs.ch:443/v1/AUTH_c0a333ecf7c045809321ce9d9ecdfdea/EBRAINS_live_papers/resources/css/live_paper.css" />
 </head>
 
 <body>
-<div class="">
+    <div class="text-panel">
+        A reduced self-consistent set of files needed to reproduce Fig. 6c of the paper is available in <a target="_blank" href="https://senselab.med.yale.edu/ModelDB/ShowModel?model=266900#tabs-1">ModelDB</a>.
+        <br /><br />
+        Simulations launched via the "Run" button will reproduce the (non-filtered) somatic membrane potential as in Fig. 5 of the paper.
+        By clicking on the "Reset/Set parameters" button you can change the values of the peak conductances of the Na+ and  M-type potassium currents (KM), the KDR currents,
+        and two A-type potassium currents (for proximal and distal dendrites), before running the model simulation.
 
-A reduced self-consistent set of files needed to reproduce Fig. 6c of the paper is available in <a target="_blank" href="https://senselab.med.yale.edu/ModelDB/ShowModel?model=266900#tabs-1">ModelDB</a>.
-<br />
-Simulations launched via the "Run" button will reproduce the (non-filtered) somatic membrane potential as in Fig. 5 of the paper.
-By clicking on the "Reset/Set parameters" button you can change the values of the peak conductances of the Na+ and  M-type potassium currents (KM), the KDR currents,
-and two A-type potassium currents (for proximal and distal dendrites), before running the model simulation.
-<br />
-It is possible to visualize the experimental traces used for the model creation via the "Experimental traces" panel buttons.
-<br /><br />
-NOTE: the online simulator might run with the a NEURON version newer than the one used for the results reported in the paper.
-Hence, you might see minor differences in the simulated activity (e.g., number of spikes).
-</div>
+        It is possible to visualize the experimental traces used for building the model via the "Experimental traces" panel buttons.
+        <br /><br />
+        NOTE: the online simulator might run with a NEURON version newer than the one used for the results reported in the paper.
+        Hence, you might see minor differences in the simulated activity, due to numerical approximations.
+    </div>
+    <hr class="solid">
+    <div class="trace-panel">
+        <div class="center-align">
+            <div class="exp-traces-title">Experimental traces</div>
+        </div>
+        <div class="center-align">
+            <div class="btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary trace-btn" for="HM_0_05" id="HM_0_05_lab">
+                    <input class="trace-check" type="checkbox" id="HM_0_05"> Exp 0.05 nA
+                </label>
+                <label class=" btn btn-secondary trace-btn" for="HM_0_1" id="HM_0_1_lab">
+                    <input class="trace-check" type="checkbox" id="HM_0_1"> Exp 0.1 nA
+                </label>
+                <label class="btn btn-secondary trace-btn" for="HM_0_15" id="HM_0_15_lab">
+                    <input class="trace-check" type="checkbox" id="HM_0_15"> Exp 0.15 nA
+                </label>
+                <label class="btn btn-secondary trace-btn" for="HM_0_2" id="HM_0_2_lab">
+                    <input class="trace-check" type="checkbox" id="HM_0_2"> Exp 0.2 nA
+                </label>
+                <label class="btn btn-secondary trace-btn" for="HM_0_25" id="HM_0_25_lab">
+                    <input class="trace-check" type="checkbox" id="HM_0_25"> Exp 0.25 nA
+                </label>
+                <label class="btn btn-secondary trace-btn" for="HM_0_3" id="HM_0_3_lab">
+                    <input class="trace-check" type="checkbox" id="HM_0_3"> Exp 0.3 nA
+                </label>
+                <label class="btn btn-secondary trace-btn" for="HM_0_35" id="HM_0_35_lab">
+                    <input class="trace-check" type="checkbox" id="HM_0_35"> Exp 0.35 nA
+                </label>
+            </div>
+        </div>
+    </div>
 
-<hr class="solid">
+    <div class="center-align param-panel">
+        <h4 class="exp-traces-title">Simulation parameters</h4>
+        <div style="overflow-x: auto">
+            <br />
+            <table class="centered">
+                <tr>
+                <tbody>
+                    <tr id="paramsrow">
 
-<div class="d-flex justify-content-center settings-title">
-<h4>Settings</h4>
-</div>
+                        <td class="input-text"><em>Na+</em><sub>ax</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="nax_ax" />
+                                <label for="nax_ax">&nbsp&nbsp</label>
+                            </div>
+                        </td>
+                        <td class="input-text"><em>Na+</em><sub>soma</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="na3_soma" />
+                                <label for="na3_soma">&nbsp&nbsp</label>
+                            </div>
+                        </td>
+                        <td class="input-text"><em>Na+</em><sub>dend</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="na3_dend" />
+                                <label for="na3_dend">&nbsp&nbsp</label>
+                            </div>
+                        </td>
+                        <td class="input-text"><em>Na+</em><sub>apical</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="na3_apical" />
+                                <label for="na3_apical">&nbsp&nbsp</label>
+                            </div>
+                        </td>
+                        <td class="input-text"><em>K</em><sub>DR ax</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="kdr_ax" />
+                                <label for="kdr_ax">&nbsp&nbsp</label>
+                            </div>
+                        </td>
+                        <td class="input-text"><em>K</em><sub>DR soma</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="kdr_soma" />
+                                <label for="kdr_soma"></label>
+                            </div>
+                        </td>
+                        <td class="input-text"><em>K</em><sub>DR dend</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="kdr_dend" />
+                                <label for="kdr_dend"></label>
+                            </div>
+                        </td>
 
-<div class="param-panel">
-<div class="d-flex justify-content-center">
-<div class="exp-traces-title">Experimental traces</div>
-</div>
-<div class="d-flex justify-content-center">
-<div class="btn-group-toggle" data-toggle="buttons">
-<label class="btn btn-secondary trace-btn" for="HM_0_05" id="HM_0_05_lab">
-<input class="trace-check" type="checkbox" id="HM_0_05"> Exp 0.05 nA
-</label>
-<label class=" btn btn-secondary trace-btn" for="HM_0_1" id="HM_0_1_lab">
-<input class="trace-check" type="checkbox" id="HM_0_1"> Exp 0.1 nA
-</label>
-<label class="btn btn-secondary trace-btn" for="HM_0_15" id="HM_0_15_lab">
-<input class="trace-check" type="checkbox" id="HM_0_15"> Exp 0.15 nA
-</label>
-<label class="btn btn-secondary trace-btn" for="HM_0_2" id="HM_0_2_lab">
-<input class="trace-check" type="checkbox" id="HM_0_2"> Exp 0.2 nA
-</label>
-<label class="btn btn-secondary trace-btn" for="HM_0_25" id="HM_0_25_lab">
-<input class="trace-check" type="checkbox" id="HM_0_25"> Exp 0.25 nA
-</label>
-<label class="btn btn-secondary trace-btn" for="HM_0_3" id="HM_0_3_lab">
-<input class="trace-check" type="checkbox" id="HM_0_3"> Exp 0.3 nA
-</label>
-<label class="btn btn-secondary trace-btn" for="HM_0_35" id="HM_0_35_lab">
-<input class="trace-check" type="checkbox" id="HM_0_35"> Exp 0.35 nA
-</label>
-</div>
-</div>
-</div>
-<div class="d-flex justify-content-center">
-<h4>Simulation parameters</h4>
-</div>
-<div class="d-flex justify-content-center">
-<div style="overflow-x: auto">
-<br />
-<table class="centered">
-<tr>
-<tbody>
-<tr id="paramsrow">
+                    </tr>
+                    <tr id="paramsrow">
+                        <td><em>K</em><sub>DR apical</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="kdr_apical" />
+                                <label for="kdr_apical"></label>
+                            </div>
+                        </td>
+                        <td><em>K</em><sub>M ax</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="kmdb_ax" />
+                                <label for="kmdb_ax"></label>
+                            </div>
+                        </td>
+                        <td><em>K</em><sub>M soma</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="kmdb_soma" />
+                                <label for="kmdb_soma"></label>
+                            </div>
+                        </td>
+                        <td><em>K</em><sub>Ap ax</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="kap_ax" />
+                                <label for="kap_ax"></label>
+                            </div>
+                        </td>
+                        <td><em>K</em><sub>Ap soma</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="kap_soma" />
+                                <label for="kap_soma"></label>
+                            </div>
+                        </td>
+                        <td><em>K</em><sub>Ap dend</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="kap_dend" />
+                                <label for="kap_dend"></label>
+                            </div>
+                        </td>
+                        <td><em>K</em><sub>Ad apical</sub></td>
+                        <td>
+                            <div class="col s12">
+                                <input class="input-field" type="number" id="valuekad" />
+                                <label for="valuekad"></label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p id="note-params"><i>NOTE: parameter values must be >=0 and <=5</i></p>
+    </div>
+    <div class="center-align">
+        <div class="btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active param-btn" for="switch" id="switch_lab">
+                <input type="checkbox" id="switch" /> Reset/Set parameters
+            </label>
+            <button id="run-btn" class="btn btn-success btn-sim param-btn active">Run</button>
+        </div>
+    </div>
+    <hr class="solid">
+    <div id="error-msg" class="center-align">
+        An error occurred while connecting to the server
+        <br />
+        Please try again in a few seconds
+    </div>
+    <div id="loader" class="row center-align">
 
-<td class="input-text"><em>Na+</em><sub>ax</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="nax_ax" />
-<label for="nax_ax">&nbsp&nbsp</label>
-</div>
-</td>
-<td class="input-text"><em>Na+</em><sub>soma</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="na3_soma" />
-<label for="na3_soma">&nbsp&nbsp</label>
-</div>
-</td>
-<td class="input-text"><em>Na+</em><sub>dend</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="na3_dend" />
-<label for="na3_dend">&nbsp&nbsp</label>
-</div>
-</td>
-<td class="input-text"><em>Na+</em><sub>apical</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="na3_apical" />
-<label for="na3_apical">&nbsp&nbsp</label>
-</div>
-</td>
-<td class="input-text"><em>K</em><sub>DR ax</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="kdr_ax" />
-<label for="kdr_ax">&nbsp&nbsp</label>
-</div>
-</td>
-<td class="input-text"><em>K</em><sub>DR soma</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="kdr_soma" />
-<label for="kdr_soma"></label>
-</div>
-</td>
-<td class="input-text"><em>K</em><sub>DR dend</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="kdr_dend" />
-<label for="kdr_dend"></label>
-</div>
-</td>
+        <div class="progress col s6 offset-s3">
+            <div class="indeterminate"></div>
+        </div>
+        <div class="row"></div>
+        Running simulation. Please wait ...
 
-</tr>
-<tr id="paramsrow">
-<td><em>K</em><sub>DR apical</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="kdr_apical" />
-<label for="kdr_apical"></label>
-</div>
-</td>
-<td><em>K</em><sub>M ax</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="kmdb_ax" />
-<label for="kmdb_ax"></label>
-</div>
-</td>
-<td><em>K</em><sub>M soma</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="kmdb_soma" />
-<label for="kmdb_soma"></label>
-</div>
-</td>
-<td><em>K</em><sub>Ap ax</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="kap_ax" />
-<label for="kap_ax"></label>
-</div>
-</td>
-<td><em>K</em><sub>Ap soma</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="kap_soma" />
-<label for="kap_soma"></label>
-</div>
-</td>
-<td><em>K</em><sub>Ap dend</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="kap_dend" />
-<label for="kap_dend"></label>
-</div>
-</td>
-<td><em>K</em><sub>Ad apical</sub></td>
-<td>
-<div class="col s12">
-<input class="input-field" type="number" id="valuekad" />
-<label for="valuekad"></label>
-</div>
-</td>
-</tr>
+    </div>
 
-</tbody>
-
-</table>
-</div>
-<br />
-</div>
-<div class="d-flex justify-content-center">
-<i style="color:red">NOTE: parameter values must be >=0 and <=5 </i>
-</div>
-<br />
-
-<div class="d-flex justify-content-center">
-<div class="btn-group-toggle" data-toggle="buttons">
-<label class="btn btn-secondary active param-btn" for="switch" id="switch_lab">
-<input type="checkbox" id="switch" /> Reset/Set parameters
-</label>
-</div>
-<button id="run-btn" class="btn btn-success btn-sim param-btn active">Run</button>
-</div>
-<hr class="solid">
-<div style="position:relative">
-<div class="overlay" id="error-msg">
-<div class="loader-class">
-<div style="text-align: center" class="row">
-An error occurred while connecting to the server
-<br />
-Please try again in a few seconds
-</div>
-</div>
-</div>
-<div class="overlay" id="loader">
-<div class="loader-class">
-
-<div style="text-align: center" class="row">
-<div class="spinner-grow" role="status"></div>
-&nbsp Running simulation<br>Please wait ...
-</div>
-</div>
-
-</div>
-<div class="d-flex justify-content-center">
-<div id="plots" class="plots">
-<div id="plot-title" style="text-align: center"></div>
-<br />
-<div class="row d-flex justify-content-center">
-<div id="plotlyChart_01" style="width:800px"></div>
-</div>
-</div>
-</div>
-</div>
+    <div id="plots" class="row" style="width: 800px;">
+        <div  class="plots">
+            <div id="plot-title"></div>
+            <div id="plotlyChart_01"></div>
+        </div>
+    </div>
 
 </body>
 </html>

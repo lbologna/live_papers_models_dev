@@ -1,54 +1,52 @@
-.overlay-wrapper {                                                                 
-    display: block;                                                                 
-    position: relative;                                                               
-    width: 100%;                                                                   
-    height: 100%;                                                                  
-    background-color: rgba(0,0,0,0.70);                                            
-    text-align: center;                                                            
-    z-index: 10;                                                                   
-    overflow-y: auto;                                                              
-    padding: 50px;                                                                 
+.overlay-wrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.70);
+    text-align: center;
+    z-index: 10;
+    overflow-y: auto;
+    padding: 50px;
+}
+
+#mycontainer {
+    width: 100px;
+    height: 100px;
+    position: relative;
 }
 
 .overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0,0,0,0);
-  z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
-
-.plot-container.plotly {
-    align-items: center;
-    align-content: center;
-}
-
 
 .loader-class {
- height:100%; 
- display:flex;
- align-items:center;
- justify-content:center;
+    width: 400px;
 }
 
 .mywrapper {
 }
-.mywrapper:hover div {
-    background-color: #FFFFFF;
-    opacity: 0.6;
-    position: relative;
-}
+
+    .mywrapper:hover div {
+        background-color: #FFFFFF;
+        opacity: 0.6;
+        position: relative;
+    }
 
 .plots {
     display: block;
+    text-align: center;
 }
 
 .btn-sim {
     margin: 5px;
     min-width: 400px;
 }
+
 .btn-panel {
     padding-bottom: 10px;
     padding-top: 5px;
@@ -70,14 +68,26 @@
     border-width: 1px;
     min-width: 100px;
 }
-.param-panel {
+
+.trace-panel {
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgrey;
     background-color: beige;
-    padding: 15px;
-    margin: 25px;
+    padding: 10px;
+    margin: 22px;
+}
+
+.param-panel {
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+    padding: 1px;
+    margin: 12px;
 }
 
 .edit-label {
-    font-size: 22px;    
+    font-size: 22px;
 }
 
 
@@ -96,7 +106,7 @@
 }
 
 .settings-name {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .btn {
@@ -110,15 +120,14 @@
 
 .exp-traces-title {
     font-size: 24px;
-    padding: 10px;
+    margin-bottom: 14px;
+    margin-top: 7px;
 }
 
 .settings-title {
-    background-color:darkslategrey;
-    color:antiquewhite;
-}
-
-.trace-btn {
+    background-color: darkslategrey;
+    color: antiquewhite;
+    padding: 1px;
 }
 
 .trace-check:hover {
@@ -133,10 +142,19 @@
     background-color: dodgerblue;
 }
 
-    .checked-trace-btn:hover {
-        background-color: dodgerblue;
-    }
+.checked-trace-btn:hover {
+    background-color: dodgerblue;
+}
 
-    .checked-trace-btn:checked {
-        background-color: dodgerblue;
-    }
+.checked-trace-btn:checked {
+    background-color: dodgerblue;
+}
+
+#error-msg {
+    color:red;
+}
+
+.text-panel {
+    margin: 22px;
+    text-align: justify;
+}

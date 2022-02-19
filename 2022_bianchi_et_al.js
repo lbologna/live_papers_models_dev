@@ -84,12 +84,15 @@ $(document).ready(function () {
     $("#nax_ax,#na3_soma,#na3_dend,#na3_apical,#kdr_ax,#kdr_soma,#kdr_dend,#kdr_apical,#kmdb_ax,#kmdb_soma,#kap_ax,#kap_soma,#kap_dend,#valuekad").on("change", validate_parameters);
 
     $('#run-btn').click(function () {
-        if (counter == 1) {            
+        if (counter == 1) {
             get_static_traces();
         }
         toggle_btns_for_run(false);
-        $('#error-msg').animate({ opacity: 0 }, 0);
+        $('#error-msg').animate({ opacity: 0 }, fadeoutval);
+        $('#error-msg').css("display", "none");
         $('#plots').animate({ opacity: 0 }, fadeoutval);
+        $('#plots').css("display", "none");
+        $('#loader').css("display", "block");
         $('#loader').animate({ opacity: 1 }, fadeinval);
         var xmin = 0;
         var xmax = 800;
@@ -105,11 +108,10 @@ $(document).ready(function () {
         update_plot();
     });
 
-
     $('#switch').on("change", function () {
         if ($('#switch')[0].checked) {
             for (let i = 0; i < param_keys.length; i++) {
-                $(param_keys[i]).prop('disabled', false);                
+                $(param_keys[i]).prop('disabled', false);
             }
         } else {
             for (let i = 0; i < param_keys.length; i++) {
@@ -172,6 +174,7 @@ function update_plot() {
     }
     Plotly.newPlot(plotlyChart_01, datafinalp1, layout_01);
 }
+
 // open websocket connection
 function ws_on_open(ws, params, nax_ax, na3_soma, na3_dend, na3_apical, kdr_ax, kdr_soma, kdr_dend, kdr_apical, kmdb_ax, kmdb_soma, kap_ax, kap_soma, kap_dend, valuekad) {
     ws.send(JSON.stringify({ 'cmd': 'set_url', 'data': model_url }));
@@ -197,12 +200,17 @@ function ws_on_open(ws, params, nax_ax, na3_soma, na3_dend, na3_apical, kdr_ax, 
 // handle errors event
 function ws_on_error() {
     $('#plots').animate({ opacity: 0 }, fadeoutval);
+    $('#plots').css("display", "none");
     $('#loader').animate({ opacity: 0 }, fadeoutval);
+    $('#loader').css("display", "none");
     const wait = time => new Promise(
         res => setTimeout(() => res(), time)
     );
-    wait(fadeinval + fadeoutval)
-        .then(() => $('#error-msg').animate({ opacity: 1 }, fadeinval));
+    wait(fadeoutval)
+        .then(() => {
+            $('#error-msg').css("display", "block");
+            $('#error-msg').animate({ opacity: 1 }, fadeinval);
+        });
 }
 // open websocket connection
 function ws_on_message(ws, evt, layout_01, title) {
@@ -221,28 +229,38 @@ function ws_on_message(ws, evt, layout_01, title) {
 
     $('#plot-title')[0].innerHTML = title;
     $('#error-msg').animate({ opacity: 0 }, 0);
+    $('#error-msg').css("display", "none");
+    $('#plots').css("display", "block");
     $('#plots').animate({ opacity: 1 }, fadeinval);
     $('#loader').animate({ opacity: 0 }, fadeoutval);
+    $('#loader').css("display", "none");
+
     toggle_btns_for_run(true);
     ws.close();
 }
 
-
+//
 function validate_parameters() {
     var flag = true;
 
     for (let i = 0; i < param_keys.length; i++) {
         if ($(param_keys[i]).val() < 0.0 || $(param_keys[i]).val() > 5.0 || $(param_keys[i]).val() == "") {
-            $(param_keys[i]).css("background-color", "#cb4335");
+            $(param_keys[i]).css("background-color", "#ffabab");
+            
             flag = false;
         } else {
             $(param_keys[i]).css("background-color", "#fff");
+            
         }
     }
     if (!flag) {
         $("#run-btn").attr("disabled", true);
+        $("#note-params").css("color", "red");
+        $("#note-params").css("font-weight", "bold");        
     } else {
         $("#run-btn").attr("disabled", false);
+        $("#note-params").css("color", "darkslategrey");
+        $("#note-params").css("font-weight", "normal");
     }
 }
 
